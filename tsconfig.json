@@ -1,15 +1,15 @@
 {
     "compilerOptions": {
-        "module": "commonjs",               // import/export syntax
-        "target": "es2021",                 // target version
-        "skipLibCheck": true,               // speeds up compilation
-        "strict": true,                     // static type-checking 
-        "noImplicitReturns": true,          // more static type-checking
-        "esModuleInterop": true,            // more import/export stuff
-        "noUncheckedIndexedAccess": true,   // dictionary/array checks
-        "exactOptionalPropertyTypes": true, // strict optional properties
+        "module": "commonjs",
+        "target": "es2021",
+        "skipLibCheck": true,
+        "strict": true,
+        "noImplicitReturns": true,
+        "esModuleInterop": true,
+        "noUncheckedIndexedAccess": true,
+        "exactOptionalPropertyTypes": true,
     },
-    "files": [ // list of main files to compile
+    "files": [
         "terraform_files/index.ts",
         "test.ts"
     ],         
