@@ -43,9 +43,10 @@ class Game {
         }
         return this.globalParameters;
     }
-    addPlayer(playerName) {
-        this.players.push(new player_1.Player(playerName, this));
-        return true;
+    newPlayer(playerName) {
+        const player = new player_1.Player(playerName, this);
+        this.players.push(player);
+        return player;
     }
 }
 exports.Game = Game;
@@ -53,4 +54,4 @@ exports.Game = Game;
 /**
  * Static counter used to automatically generate a Unique ID (UID) for each game.
  */
-Game._nextID = 0n;
+Game._nextID = 1n; // Pending: Do we use bigint? Can it have a nicer number?

@@ -5,15 +5,34 @@
 import { GlobalParameters } from "./globalParameters";
 
 export type card = {
+    code : string,
     name : string,
     cost : number,
-    requirement : GlobalParameters | undefined,
-    //changePlayerProduction : ProductionEffects | undefined, // Pending: to implement
+    requirement? : GlobalParameters | undefined,
+    //changePlayerProduction? : ProductionEffects | undefined, // Pending: to implement
     //changeGlobalParameter : {key : "globalOxygen" | "globalOcean" | "globalTemperature" , addValue : number}[] | undefined
-    changeGlobalParameter : {key : "globalOxygen" | "globalOcean" | "globalTemperature" , addValue : number}
+    changeGlobalParameter? : {key : "globalOxygen" | "globalOcean" | "globalTemperature" , addValue : number},
+    changePlayerPoints? : {key : "terraformPoints" | "victoryPoints" , changeValue : number}[]
 }
 
- const card003 : card = {
+// PENDING TO IMPLEMENT THE PLAYER EFFECTS!
+
+export type availableCards = "card003" | "card004" | "card005";
+export const card001 : card = {
+    code : "card001",
+    name : "Colonizer Training Camp",
+    cost : 8,
+    requirement : undefined,
+/*     changePlayerProduction : 
+        {
+            energy : 1
+        }, */
+    changeGlobalParameter : 
+            {key : "globalTemperature",
+            addValue : 1}     
+ }
+export const card002 : card = {
+    code : "card003",
     name : "Deep Well Heating",
     cost : 13,
     requirement : undefined,
@@ -25,8 +44,21 @@ export type card = {
             {key : "globalTemperature",
             addValue : 1}     
  }
-
- const card004 : card = {
+export const card003 : card = {
+    code : "card003",
+    name : "Deep Well Heating",
+    cost : 13,
+    requirement : undefined,
+/*     changePlayerProduction : 
+        {
+            energy : 1
+        }, */
+    changeGlobalParameter : 
+            {key : "globalTemperature",
+            addValue : 1}     
+ }
+export const card004 : card = {
+    code : "card004",
     name : "Cloud Seeding",
     cost : 7,
     requirement : 
@@ -47,7 +79,3 @@ export type card = {
  }
 
  // Pending: need to specify more the cost numbers
-
-
- //export const cards = [card003, card004];
- export {card003, card004};

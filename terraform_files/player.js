@@ -4,13 +4,16 @@ exports.Player = void 0;
 const cards_1 = require("./cards");
 // Pending to implement
 class Player {
+    /* Pending: Can this be initialized simpler? */
     constructor(name, game) {
         this.name = name;
         this.game = game;
-        this.terraformPoints = 0;
-        this.victoryPoints = 0;
-        this.currentcards = [cards_1.card003]; //Examlpe // Pending: to clean this.
         /* Can this be initialized simpler? */
+        this.playerPoints = {
+            terraformPoints: 0,
+            victoryPoints: 0
+        };
+        this.currentcards = []; //Example // Pending: to clean this. // Pending to reduce scope
         // Pending: player belongs to a specific Game
         this.currentResources = {
             MegaCredits: 0,
@@ -25,16 +28,38 @@ class Player {
     }
     // ==== METHODS ====
     //Pending to implement
-    playCard(thisGame, playableCard) {
-        // Add log of changes
+    listCards() {
+        return this.currentcards;
+    }
+    playCard(cardCode) {
+        const playableCard = returnCardInPlayer(cardCode, this);
+        if (playableCard === undefined) {
+            throw new Error(`${this.name} does not have this card`);
+        }
         // Change Global Parameters // Pending: implement the rest of cases like changing production and requirements checking
-        const key = playableCard.changeGlobalParameter?.key;
-        const value = playableCard.changeGlobalParameter?.addValue;
-        thisGame.globalParameters[key] += value;
-        //thisGame.globalParameters["globalOcean"] = 5;
+        if (playableCard.changeGlobalParameter != undefined) {
+            const key = playableCard?.changeGlobalParameter?.key;
+            const value = playableCard?.changeGlobalParameter?.addValue;
+            this.game.globalParameters[key] += value;
+        }
+        // Need to add POP from here
+        // Add log of changes
+    }
+    withStartCards() {
+        this.currentcards = [cards_1.card003];
+        return this;
+    }
+    addCard(addCard) {
+        this.currentcards.push(addCard);
+        return this;
     }
 }
 exports.Player = Player;
+/* This is a helper function to find a card in a player or return undefined. This does not need to be exported. */
+function returnCardInPlayer(codeToSearch, playerToSearch) {
+    const returningCard = playerToSearch.listCards().find(element => element.code === codeToSearch);
+    return returningCard;
+}
 /* class Player
 Properties:
     type Player Information (de

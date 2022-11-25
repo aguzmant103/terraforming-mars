@@ -13,7 +13,7 @@ export class Game {
     /**
      * Static counter used to automatically generate a Unique ID (UID) for each game. 
      */
-    private static _nextID: bigint = 0n;
+    private static _nextID: bigint = 1n; // Pending: Do we use bigint? Can it have a nicer number?
     /**
      * Automatically generated UID for a game instance.
      */
@@ -21,7 +21,7 @@ export class Game {
     /**
      * Global parameters of game that represent Oxygen, Ocean and Temperature levels.
      */
-    globalParameters : GlobalParameters = { globalOxygen : 0, globalOcean : 0, globalTemperature : -30 };
+    readonly globalParameters : GlobalParameters = { globalOxygen : 0, globalOcean : 0, globalTemperature : -30 };
     /**
      * Initiallizing a player list when a game is created.
      */
@@ -54,12 +54,19 @@ export class Game {
         return this.globalParameters;
     }
 
-
-    addPlayer(playerName : string) : boolean {
-        this.players.push(new Player (playerName, this));
-        return true;
+    newPlayer(playerName : string) : Player {
+        const player = new Player (playerName, this);
+        this.players.push(player);
+        return player;
     }
-    // addPlayer(playerName: string): Player{
-    //     return this.player(playerName);
-    // }
+
+/* static newDraft(seller: Seller): DraftListing {
+    return new ConcreteListing(this._nextId++, seller) as DraftListing;
+}
+
+titled(title: string): this & {title: string} {
+    this.title = title;
+    return this as this & {title: string};
+} */
+
 }

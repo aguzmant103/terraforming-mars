@@ -1,12 +1,15 @@
 import { resources } from "./resources"
-import { card, card003, card004 } from "./cards"
+import { card, card003, card004, availableCards } from "./cards"
 import { Game } from "./terraform";
 // Pending to implement
 export class Player {
-    readonly terraformPoints : number = 0;
-    readonly victoryPoints : number = 0;
-    readonly currentcards : card[] = [card003]; //Examlpe // Pending: to clean this.
     /* Can this be initialized simpler? */
+    readonly playerPoints = {
+        terraformPoints : 0,
+        victoryPoints : 0
+    }
+    private currentcards : card[] = []; //Example // Pending: to clean this. // Pending to reduce scope
+
     // Pending: player belongs to a specific Game
     readonly currentResources : resources = {
         MegaCredits : 0,
@@ -15,7 +18,8 @@ export class Player {
         Plants : 0,
         Energy : 0,
         Heat : 0
-}
+}   
+    /* Pending: Can this be initialized simpler? */
     constructor (readonly name : string, readonly game : Game){
         this.name = name;    
         this.game = game;           
@@ -23,15 +27,45 @@ export class Player {
     // ==== METHODS ====
 
     //Pending to implement
-    playCard (thisGame : Game, playableCard : card) {
-        // Add log of changes
+    
+    listCards () : card[] {
+        return this.currentcards
+    }
+    playCard (cardCode : availableCards) 
+    {
+        const playableCard = returnCardInPlayer(cardCode, this)
+        
+        if (playableCard === undefined)
+        {
+            throw new Error (`${this.name} does not have this card`)
+        }
+        
         // Change Global Parameters // Pending: implement the rest of cases like changing production and requirements checking
-        const key = playableCard.changeGlobalParameter?.key;
-        const value = playableCard.changeGlobalParameter?.addValue;
-        thisGame.globalParameters[key] += value;
-        //thisGame.globalParameters["globalOcean"] = 5;
+        if (playableCard.changeGlobalParameter != undefined)
+        {
+            const key = playableCard?.changeGlobalParameter?.key;
+            const value = playableCard?.changeGlobalParameter?.addValue;
+            this.game.globalParameters[key] += value;
+        }
+
+        // Need to add POP from here
+        // Add log of changes
+        
+    }
+    withStartCards(): this {
+        this.currentcards = [card003];
+        return this;
+    }
+    addCard(addCard: card): this {
+        this.currentcards.push(addCard);
+        return this;
     }
 
+}
+/* This is a helper function to find a card in a player or return undefined. This does not need to be exported. */
+function returnCardInPlayer (codeToSearch : string, playerToSearch : Player ) : card | undefined {
+    const returningCard = playerToSearch.listCards().find(element => element.code === codeToSearch);
+    return returningCard;
 }
 
 /* class Player
