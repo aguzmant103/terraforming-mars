@@ -4,6 +4,8 @@ export class Player {
     readonly terraformPoints : number = 0;
     readonly victoryPoints : number = 0;
     // readonly currentcards : card = [];
+    /* Can this be initialized simpler? */
+    // Pending: player belongs to a specific Game
     readonly currentResources : resources = {
         MegaCredits : 0,
         Steel : 0,

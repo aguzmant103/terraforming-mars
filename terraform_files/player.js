@@ -7,6 +7,8 @@ class Player {
         this.terraformPoints = 0;
         this.victoryPoints = 0;
         // readonly currentcards : card = [];
+        /* Can this be initialized simpler? */
+        // Pending: player belongs to a specific Game
         this.currentResources = {
             MegaCredits: 0,
             Steel: 0,

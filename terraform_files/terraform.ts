@@ -1,8 +1,7 @@
 // Check there are no refernces for Marketplace, User, Buyer, Seller, etc.
-
 // PENDING: Imports everything from the other submodules
 import {Player} from "./player";
-import {GlobalParameters} from "./globalParameters";
+import {GlobalOcean, GlobalOxygen, GlobalParameters} from "./globalParameters";
 
 /**
  * This Game class acts as the entry point to the players and board of a given game:
@@ -11,7 +10,6 @@ import {GlobalParameters} from "./globalParameters";
  */
 export class Game {
     // ==== PROPERTIES & CONSTRUCTOR ====
-
     /**
      * Static counter used to automatically generate a Unique ID (UID) for each game. 
      */
@@ -27,11 +25,8 @@ export class Game {
     /**
      * Initiallizing a player list when a game is created.
      */
-    private players: Player[] = [];
+    // private players: Player[] = [];
 
-    // showGlobalParameters () : GlobalParameters{
-    //     return this.globalParameters();
-    // }
     /**
      * Returns the player with the queried ID, or undefined if one does not exist.
      */
@@ -43,13 +38,23 @@ export class Game {
         this.id = Game._nextID++;
     }
 
-     /**
-     * Edit one or several global parameter efficiently. The type of input values allowed is the union of Global Oxygen, Ocean and Temperature types.
+    // ==== METHODS ====
+    /**
+     * Edit one or several global parameter efficiently. 
+     * If no key value pair is specified, return the current global parameters. 
      */
-/*     editGlobalParameter(newGlobalParameter: GlobalParameters, value : GlobalOxygen | GlobalOcean |GlobalTemperature): GlobalParameters {
-        this.globalParameters=newGlobalParameter;
+    // Pending: need to make this private and only playable with cards.
+    editGlobalParameter(...values: {key : "globalOxygen" | "globalOcean" | "globalTemperature" , addValue : number}[]) : GlobalParameters {
+        // Pending: need stronger type checkers here and guardrails
+        // Pending: how to prevent it overflows
+        // Pending: how to prevent garbish values are entered during runtime
+        for (const element of values){
+            this.globalParameters[element.key] += element.addValue;
+        }
         return this.globalParameters;
-    } */
+    }
+
+
     addPlayer(playerName : string) : boolean {
         return true;
     }
