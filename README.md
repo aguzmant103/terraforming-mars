@@ -6,7 +6,7 @@ The projects often directly or indirectly contribute to the terraforming process
 points (VPs). Your TR is increased each time you raise a global parameter (temperature, oxygen or ocean).
 
 ## This implementation
-This implementation of Terraforming Mars is implemented using OOP in Typescript as part of Object Oriented Programming course at Oxford University.
+This implementation of Terraforming Mars is implemented using OOP in Typescript as part of Object Oriented Programming course.
 
 
 ## Out of Scope
@@ -15,3 +15,7 @@ The following features have being left out deliveratively from implementation fr
 - Milestones
 - Complete list of Cards
 - Corporation selection for players
+- Tags
+
+## Where to find the concept implementations?
+In order to facilitate the review, below you'll see a list of concepts studied in class with references to the implementation in the project.

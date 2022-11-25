@@ -17,25 +17,25 @@ export class Game {
     /**
      * Automatically generated UID for a game instance.
      */
-    readonly id: bigint;
+    readonly gameId: bigint;
     /**
      * Global parameters of game that represent Oxygen, Ocean and Temperature levels.
      */
-    readonly globalParameters : GlobalParameters = { globalOxygen : 0, globalOcean : 0, globalTemperature : -30 };
+    globalParameters : GlobalParameters = { globalOxygen : 0, globalOcean : 0, globalTemperature : -30 };
     /**
      * Initiallizing a player list when a game is created.
      */
-    // private players: Player[] = [];
+    readonly players: Player[] = [];
 
     /**
      * Returns the player with the queried ID, or undefined if one does not exist.
      */
-/*     player(id: number): Player|undefined {
-        return this.players[id];
-    } */
+    player(name: string): Player|undefined {
+        return this.players[0];
+    }
     constructor(){
         // Automatically generate UID for this instance. Increase global counter
-        this.id = Game._nextID++;
+        this.gameId = Game._nextID++;
     }
 
     // ==== METHODS ====
@@ -45,9 +45,9 @@ export class Game {
      */
     // Pending: need to make this private and only playable with cards.
     editGlobalParameter(...values: {key : "globalOxygen" | "globalOcean" | "globalTemperature" , addValue : number}[]) : GlobalParameters {
-        // Pending: need stronger type checkers here and guardrails
+/*         // Pending: need stronger type checkers here and guardrails
         // Pending: how to prevent it overflows
-        // Pending: how to prevent garbish values are entered during runtime
+        // Pending: how to prevent garbish values are entered during runtime */
         for (const element of values){
             this.globalParameters[element.key] += element.addValue;
         }
@@ -56,6 +56,7 @@ export class Game {
 
 
     addPlayer(playerName : string) : boolean {
+        this.players.push(new Player (playerName, this));
         return true;
     }
     // addPlayer(playerName: string): Player{
