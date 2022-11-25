@@ -1,4 +1,5 @@
 "use strict";
+// Check there are no refernces for Marketplace, User, Buyer, Seller, etc.
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Game = void 0;
 /**
@@ -7,9 +8,18 @@ exports.Game = void 0;
  * (an arrangement known as the facade pattern).
  */
 class Game {
+    // showGlobalParameters () : GlobalParameters{
+    //     return this.globalParameters();
+    // }
+    /**
+     * Returns the player with the queried ID, or undefined if one does not exist.
+     */
+    /*     player(id: number): Player|undefined {
+            return this.players[id];
+        } */
     constructor() {
         /**
-         * Initial global parameters when a game is created.
+         * Global parameters of game that represent Oxygen, Ocean and Temperature levels.
          */
         this.globalParameters = { globalOxygen: 0, globalOcean: 0, globalTemperature: -30 };
         /**
@@ -20,10 +30,14 @@ class Game {
         this.id = Game._nextID++;
     }
     /**
-     * Returns the player with the queried ID, or undefined if one does not exist.
-     */
-    player(id) {
-        return this.players[id];
+    * Edit one or several global parameter efficiently. The type of input values allowed is the union of Global Oxygen, Ocean and Temperature types.
+    */
+    /*     editGlobalParameter(newGlobalParameter: GlobalParameters, value : GlobalOxygen | GlobalOcean |GlobalTemperature): GlobalParameters {
+            this.globalParameters=newGlobalParameter;
+            return this.globalParameters;
+        } */
+    addPlayer(playerName) {
+        return true;
     }
 }
 exports.Game = Game;

@@ -13,10 +13,12 @@ const terraform_files_1 = require("./terraform_files");
 // const activeListing = listing.activate();
 // // const listing = Listing.newDraft(seller)
 // //                        .titled("Super Mushrooms x3")
-console.log("Hello World!");
+console.log("1. INITIALLIZING A GAME!");
 let game1 = new terraform_files_1.Game();
 // console.log(game1.player(0));
 console.log(game1);
 let game2 = new terraform_files_1.Game();
+// console.log(game2);
+game2.addPlayer("Steve");
 console.log(game2);
 // console.log(game2.player(0));

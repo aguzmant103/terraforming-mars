@@ -14,3 +14,4 @@ The following features have being left out deliveratively from implementation fr
 - Awards
 - Milestones
 - Complete list of Cards
+- Corporation selection for players
