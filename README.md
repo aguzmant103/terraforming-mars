@@ -1,3 +1,4 @@
+# ![ascii-art](https://raw.githubusercontent.com/dawsonbooth/ascii-art/master/logo.png)
 # Terraforming Mars
 
 Terraforming Mars is a game by Jacob Fryxelius. In Terraforming Mars, you control a corporation, and you buy and play cards describing different projects.
