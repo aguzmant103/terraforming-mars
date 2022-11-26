@@ -8,11 +8,11 @@
 - Victory Points dependant on other factors */
 
 import { GlobalParameters } from "./globalParameters";
-import { resources } from "./resources";
+import { resources, R } from "./resources";
 
+// Pending: is this needed? Check export imports too
 export type availableCards = "card001" | "card002" | "card003" | "card004" | "card005" | "card009";
 
-type R = "MegaCredits" |"Steel" | "Titanium" | "Plants" | "Energy" | "Heat";
 type GP = "globalOxygen" | "globalOcean" | "globalTemperature";
 type PP = "terraformPoints" | "victoryPoints";
 

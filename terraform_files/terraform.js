@@ -22,13 +22,6 @@ class Game {
         // Automatically generate UID for this instance. Increase global counter
         this.gameId = Game._nextID++;
     }
-    /**
-     * Returns the first player with the queried name, or undefined if one does not exist.
-     * Pending: No duplication of player names is possible
-     */
-    player(name) {
-        return this.players.find(element => element.name === name);
-    }
     // ==== METHODS ====
     /**
      * Edit one or several global parameter efficiently.
@@ -44,10 +37,24 @@ class Game {
         }
         return this.globalParameters;
     }
+    /**
+    * The player specified plays a card. Returns undefined if the player is not found.
+    * Throws an error if the player does not have the card.
+    */
+    playCard(playerName, card) {
+        this.player(playerName)?.playCard(card);
+    }
     newPlayer(playerName) {
         const player = new player_1.Player(playerName, this);
         this.players.push(player);
         return player;
+    }
+    /**
+     * Returns the first player with the queried name, or undefined if one does not exist.
+     * Pending: No duplication of player names is possible
+     */
+    player(name) {
+        return this.players.find(element => element.name === name);
     }
 }
 exports.Game = Game;

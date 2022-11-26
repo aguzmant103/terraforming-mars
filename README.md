@@ -13,6 +13,14 @@ points (VPs). Your TR is increased each time you raise a global parameter (tempe
 
 This implementation of Terraforming Mars is implemented using OOP in Typescript as part of Object Oriented Programming course.
 
+## How to run me
+1. Change directory to the main "terraforming-mars" folder.
+2. Run 'node tests.js' and experiment by toggling the different console elements.
+Alternatively.
+2. Run 'node'
+3. Interactively use the following commands:
+4. PENDING OF IMPLEMENTATION
+
 ## Out of Scope
 
 The following features have being deliveratively left out from implementation from the original game:
@@ -30,9 +38,11 @@ The following features have being deliveratively left out from implementation fr
 To exemplify the usage of different OOP concepts, the following list was compiled:
 
 Basic elements:
-- [X] Type Aliases "./cards" Line 15, 16, 17
-- [x] Destructuring "./players" Line 55, 72
-- [x] For...of Loops "./terraform" Line 42
+- [X] Static Types "./resources" Line 5
+- [X] Type Aliases "./cards" Line 15, 16
+- [] Constructing
+- [X] Destructuring "./players" Line 55, 72
+- [X] For...of Loops "./terraform" Line 42
 - [] For...in Loops
 
 Usage of data structures:
@@ -40,8 +50,6 @@ Usage of data structures:
 - [] LinkedList
 
 Usage of elements:
-- [] Static Types
-- [] Construction and deconstructing
 - [] Types: for Lightweight data
 - [] Classes
   ○ Single Responsibility Principle
@@ -59,39 +67,32 @@ Usage of idiomatic features>
 - []
 
 Usage of Design Patterns:
-
-- [] Façade: data management.
+- [] Façade: data management
 - [] Factory Patter
 - [] State Patter
 - [] Builder Patter
 - [] Fluint
 
 Usage of principles and concepts:
-
 - [] SOLID
 
 Organization:
-
-- [] Single folder
-- [] Different files and good usage of expot
-- [] Index.ts
+- [X] Single folder: can be found under the folder "terraform_files"
+- [X] Index: can be found under "terraform_files/index.ts"
+- [] Export and local elements
 
 Extra Points:
-
 - [] Recursion
 
 Documentation:
-
 - [] Add one line per method
 - [] Except terribly basic (1-2 lines of code)
 
 Style:
-
 - [] Usage of TSList
 
 Readme
-
-- [] Usage of TypeScript and explain how to run it
+- [X] Here explains the background, list of elements looked, and how to run it.
 
 Specific:
 

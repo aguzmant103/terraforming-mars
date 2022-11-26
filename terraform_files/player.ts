@@ -49,7 +49,7 @@ export class Player {
     {
         return this.playerResources;
     }
-    playCard (cardCode : availableCards) 
+    playCard (cardCode : string) 
     {   
         // 1. Check card if card is available for the player.
         const playableCard = returnCardInPlayer(cardCode, this)

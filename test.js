@@ -75,30 +75,9 @@ console.log("2. PLAYING A CARD");
 console.log("2.1 ADDING MEGACREDITS TO PLAYER");
 game2.player("Mark")?.addResource("MegaCredits", 20);
 console.log("2.2a SHOWING PARAMETERS BEFORE THE CARD");
-console.log(game2.globalParameters);
+/* console.log(game2.globalParameters);
 console.log(game2.player("Mark")?.listResources());
 console.log(game2.player("Mark")?.listProduction());
-console.log(game2.player("Mark")?.listCards());
+console.log(game2.player("Mark")?.listCards()); */
 console.log("2.2b SHOWING PARAMETERS AFTER THE CARD");
-game2.player("Mark")?.playCard("card003");
-console.log(game2.globalParameters);
-console.log(game2.player("Mark")?.listResources());
-console.log(game2.player("Mark")?.listProduction());
-console.log(game2.player("Mark")?.listCards());
-/* static newDraft(seller: Seller): DraftListing {
-    return new ConcreteListing(this._nextId++, seller) as DraftListing;
-}
-
-titled(title: string): this & {title: string} {
-    this.title = title;
-    return this as this & {title: string};
-} */
-//console.log(game2.globalParameters);
-/* (Rest parameters) Changing  global parameters with an arbitrary number of argumens */
-//game2.editGlobalParameter({key : "globalOxygen", addValue : 9},{key : "globalTemperature", addValue : 9});
-//game2.editGlobalParameter();
-//console.log(game2.globalParameters);
-//game2.editGlobalParameter({key : "globalOxygen", addValue : 9});
-//game2.editGlobalParameter({key : "globalTemperature", addValue : 4});
-//console.log(game2.globalParameters);
-// console.log(game2.player(0));
+game2.playCard("Mark", "card003");
