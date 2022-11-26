@@ -40,21 +40,38 @@ class Player {
         return this.currentcards;
     }
     playCard(cardCode) {
+        // 1. Check card is valid for the player.
         const playableCard = returnCardInPlayer(cardCode, this);
-        // Pending: need to review these errors are well handled.
         if (playableCard === undefined) {
             throw new Error(`${this.name} does not have this card`);
         }
-        // Change Global Parameters // Pending: implement the rest of cases like changing production and requirements checking
+        // 2. Check that the preconditions for the card effects hold
+        if (playableCard.requirement != undefined) {
+            let { key, higherOrEqual, value } = playableCard.requirement;
+            // Check if the requirements are fulfilled. The 'higherOrEqual' boolean selects which comparison to make.
+            const reqFulfilled = higherOrEqual ? this.game.globalParameters[key] >= value : this.game.globalParameters[key] <= value;
+            if (!reqFulfilled) {
+                throw new Error('The global parameter requirements are not met.');
+            }
+            //const key = playableCard?.changeGlobalParameter?.key;
+            //const value = playableCard?.changeGlobalParameter?.addValue;
+            this.game.globalParameters[key] += value;
+        }
+        // 2.1. Check the resources are available
+        // 2.1. Check the globalParameters are available
+        // Pending: implement the rest of cases like changing production and requirements checking
         if (playableCard.changeGlobalParameter != undefined) {
             const key = playableCard?.changeGlobalParameter?.key;
             const value = playableCard?.changeGlobalParameter?.addValue;
             this.game.globalParameters[key] += value;
         }
-        // Pending: create and refactor this log action
+        // 3. Perform the transitions
+        // 3.1 Change Global Parameters
+        // 3.2 Change Player Resources
+        // 3.3 Change Player Production
+        // 3.4 Remove card from list
+        // 3.4 Add Logs
         /*   logAction(this, "played",playableCard.name) */
-        // Need to add POP from here
-        // Add log of changes
     }
     withStartCards() {
         this.currentcards = [cards_1.card003];

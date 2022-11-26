@@ -8,9 +8,9 @@ exports.card001 = {
     name: "Colonizer Training Camp",
     cost: 8,
     requirement: {
-        globalOxygen: 5,
-        globalOcean: 0,
-        globalTemperature: -30
+        key: "globalOxygen",
+        higherOrEqual: false,
+        value: 5,
     },
     changePlayerPoints: {
         key: "terraformPoints",
@@ -52,9 +52,9 @@ exports.card004 = {
     name: "Cloud Seeding",
     cost: 11,
     requirement: {
-        globalOxygen: 0,
-        globalOcean: 3,
-        globalTemperature: -30
+        key: "globalOxygen",
+        higherOrEqual: true,
+        value: 3,
     },
     changePlayerProduction: [
         {
@@ -68,7 +68,7 @@ exports.card004 = {
     ]
 };
 exports.card009 = {
-    code: "card000",
+    code: "card009",
     name: "Asteroid",
     cost: 14,
     changeGlobalParameter: {

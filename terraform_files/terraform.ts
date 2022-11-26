@@ -28,11 +28,13 @@ export class Game {
     readonly players: Player[] = [];
 
     /**
-     * Returns the player with the queried ID, or undefined if one does not exist.
+     * Returns the first player with the queried name, or undefined if one does not exist.
+     * Pending: No duplication of player names is possible
      */
     player(name: string): Player|undefined {
-        return this.players[0];
+        return this.players.find(element => element.name === name);
     }
+
     constructor(){
         // Automatically generate UID for this instance. Increase global counter
         this.gameId = Game._nextID++;

@@ -16,7 +16,7 @@ export type card =
     code : string,
     name : string,
     cost : number,
-    requirement? : GlobalParameters,
+    requirement? : {key : "globalOxygen" | "globalOcean" | "globalTemperature" , higherOrEqual : boolean , value : number},
     changeGlobalParameter? : {key : "globalOxygen" | "globalOcean" | "globalTemperature" , addValue : number},
     changePlayerProduction? : {key : "MegaCredits" | "Steel" | "Titanium" | "Plants"| "Energy"| "Heat" , changeValue : number}[],
     changePlayerPoints? : {key : "terraformPoints" | "victoryPoints" , changeValue : number},
@@ -29,9 +29,9 @@ export const card001 : card =
     cost : 8,
     requirement : 
     {
-        globalOxygen : 5,
-        globalOcean : 0,
-        globalTemperature : -30
+        key : "globalOxygen",
+        higherOrEqual : false,
+        value : 5,
     },
     changePlayerPoints : 
     {
@@ -82,9 +82,9 @@ export const card004 : card =
     cost : 11,
     requirement : 
     {
-        globalOxygen : 0,
-        globalOcean : 3,
-        globalTemperature : -30
+        key : "globalOxygen",
+        higherOrEqual : true,
+        value : 3,
     },
     changePlayerProduction : 
     [
@@ -100,7 +100,7 @@ export const card004 : card =
 }
 export const card009 : card = 
 {
-    code : "card000",
+    code : "card009",
     name : "Asteroid",
     cost : 14,
     changeGlobalParameter : 
