@@ -10,7 +10,9 @@ This implementation of Terraforming Mars is implemented using OOP in Typescript 
 
 
 ## Out of Scope
-The following features have being left out deliveratively from implementation from the original game:
+The following features have being deliveratively left out from implementation from the original game:
+- Editing other's players production values
+- Top level requirements
 - Awards
 - Milestones
 - Complete list of Cards

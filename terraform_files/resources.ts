@@ -1,7 +1,5 @@
-export {resources};
-
 /// Pending: need to restrict this more
-type resources = {
+export type resources = {
     MegaCredits : number,
     Steel : number,
     Titanum : number,

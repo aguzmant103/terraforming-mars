@@ -14,6 +14,14 @@ class Player {
             victoryPoints: 0
         };
         this.currentcards = []; //Example // Pending: to clean this. // Pending to reduce scope
+        this.playerProduction = {
+            MegaCredits: 1,
+            Steel: 1,
+            Titanum: 1,
+            Plants: 1,
+            Energy: 1,
+            Heat: 1
+        };
         // Pending: player belongs to a specific Game
         this.currentResources = {
             MegaCredits: 0,
@@ -33,6 +41,7 @@ class Player {
     }
     playCard(cardCode) {
         const playableCard = returnCardInPlayer(cardCode, this);
+        // Pending: need to review these errors are well handled.
         if (playableCard === undefined) {
             throw new Error(`${this.name} does not have this card`);
         }
@@ -42,6 +51,8 @@ class Player {
             const value = playableCard?.changeGlobalParameter?.addValue;
             this.game.globalParameters[key] += value;
         }
+        // Pending: create and refactor this log action
+        /*   logAction(this, "played",playableCard.name) */
         // Need to add POP from here
         // Add log of changes
     }

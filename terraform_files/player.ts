@@ -10,6 +10,15 @@ export class Player {
     }
     private currentcards : card[] = []; //Example // Pending: to clean this. // Pending to reduce scope
 
+    private playerProduction = 
+    {
+        MegaCredits : 1,
+        Steel : 1,
+        Titanum : 1,
+        Plants : 1,
+        Energy : 1,
+        Heat : 1
+    };
     // Pending: player belongs to a specific Game
     readonly currentResources : resources = {
         MegaCredits : 0,
@@ -28,18 +37,18 @@ export class Player {
 
     //Pending to implement
     
-    listCards () : card[] {
+    listCards () : card[] 
+    {
         return this.currentcards
     }
     playCard (cardCode : availableCards) 
     {
         const playableCard = returnCardInPlayer(cardCode, this)
-        
+        // Pending: need to review these errors are well handled.
         if (playableCard === undefined)
         {
             throw new Error (`${this.name} does not have this card`)
         }
-        
         // Change Global Parameters // Pending: implement the rest of cases like changing production and requirements checking
         if (playableCard.changeGlobalParameter != undefined)
         {
@@ -47,16 +56,19 @@ export class Player {
             const value = playableCard?.changeGlobalParameter?.addValue;
             this.game.globalParameters[key] += value;
         }
-
+        // Pending: create and refactor this log action
+      /*   logAction(this, "played",playableCard.name) */
         // Need to add POP from here
         // Add log of changes
         
     }
-    withStartCards(): this {
+    withStartCards(): this 
+    {
         this.currentcards = [card003];
         return this;
     }
-    addCard(addCard: card): this {
+    addCard(addCard: card): this 
+    {
         this.currentcards.push(addCard);
         return this;
     }
