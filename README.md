@@ -1,4 +1,9 @@
 # ![ascii-art](https://cdn1.epicgames.com/spt-assets/5199b206e46947ebad5e5c282e95776f/terraforming-mars-offer-1j70f.jpg?h=270&resize=1&w=480)
+
+<p align="center">
+  <img src="https://cdn1.epicgames.com/spt-assets/5199b206e46947ebad5e5c282e95776f/terraforming-mars-offer-1j70f.jpg?h=270&resize=1&w=480" alt="Terraforming Mars"/>
+</p>
+
 # Terraforming Mars
 
 Terraforming Mars is a game by Jacob Fryxelius. In Terraforming Mars, you control a corporation, and you buy and play cards describing different projects.
