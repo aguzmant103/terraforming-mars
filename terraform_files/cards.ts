@@ -8,26 +8,46 @@
 - Victory Points dependant on other factors */
 
 import { GlobalParameters } from "./globalParameters";
+import { resources } from "./resources";
 
 export type availableCards = "card001" | "card002" | "card003" | "card004" | "card005" | "card009";
 
+type R = "MegaCredits" |"Steel" | "Titanium" | "Plants" | "Energy" | "Heat";
+type GP = "globalOxygen" | "globalOcean" | "globalTemperature";
+type PP = "terraformPoints" | "victoryPoints";
+
+// Pending: need to  restrict more the number type and also align the naming
 export type card = 
 {
     code : string,
     name : string,
-    cost : number,
-    requirement? : {key : "globalOxygen" | "globalOcean" | "globalTemperature" , higherOrEqual : boolean , value : number},
-    changeGlobalParameter? : {key : "globalOxygen" | "globalOcean" | "globalTemperature" , addValue : number},
-    changePlayerProduction? : {key : "MegaCredits" | "Steel" | "Titanium" | "Plants"| "Energy"| "Heat" , changeValue : number}[],
-    changePlayerPoints? : {key : "terraformPoints" | "victoryPoints" , changeValue : number},
-    changePlayerResources? : {key : "MegaCredits" | "Steel" | "Titanium" | "Plants"| "Energy"| "Heat" , changeValue : number}[]
+    requiredResources : {key : R, value : number}[],
+    requiredGlobalParameter? : {key : GP , higherOrEqual : boolean , value : number},
+    // PENDING: requiredPlayerProduction
+    changeGlobalParameter? : {key : GP , addValue : number},
+    changePlayerProduction? : {key : R , changeValue : number}[],
+    changePlayerPoints? : {key : PP , changeValue : number},
+    changePlayerResources : {key : R , changeValue : number}[]
 }
 export const card001 : card = 
 {
     code : "card001",
     name : "Colonizer Training Camp",
-    cost : 8,
-    requirement : 
+    requiredResources : 
+    [
+        {
+            key : "MegaCredits",
+            value : 8
+        }
+    ],
+    changePlayerResources :
+    [
+        {
+            key : "MegaCredits",
+            changeValue : -8
+        }
+    ],
+    requiredGlobalParameter : 
     {
         key : "globalOxygen",
         higherOrEqual : false,
@@ -43,7 +63,20 @@ export const card002 : card =
 {
     code : "card002",
     name : "Asteroid Mining Consortium",
-    cost : 13,
+    requiredResources : 
+    [
+        {
+            key : "MegaCredits",
+            value : 13
+        }
+    ],
+    changePlayerResources :
+    [
+        {
+            key : "MegaCredits",
+            changeValue : -13
+        }
+    ],
     changePlayerProduction : 
     [
         {
@@ -61,7 +94,20 @@ export const card003 : card =
 {
     code : "card003",
     name : "Deep Well Heating",
-    cost : 13,
+    requiredResources : 
+    [
+        {
+            key : "MegaCredits",
+            value : 13
+        }
+    ],
+    changePlayerResources :
+    [
+        {
+            key : "MegaCredits",
+            changeValue : -13
+        }
+    ],
     changeGlobalParameter : 
     {
         key : "globalTemperature",
@@ -79,8 +125,21 @@ export const card004 : card =
 {
     code : "card004",
     name : "Cloud Seeding",
-    cost : 11,
-    requirement : 
+    requiredResources : 
+    [
+        {
+            key : "MegaCredits",
+            value : 11
+        }
+    ],
+    changePlayerResources :
+    [
+        {
+            key : "MegaCredits",
+            changeValue : -11
+        }
+    ],
+    requiredGlobalParameter : 
     {
         key : "globalOxygen",
         higherOrEqual : true,
@@ -102,17 +161,27 @@ export const card009 : card =
 {
     code : "card009",
     name : "Asteroid",
-    cost : 14,
-    changeGlobalParameter : 
-    {
-        key : "globalTemperature",
-        addValue : 1
-    },
-    changePlayerResources : 
+    requiredResources : 
     [
+        {
+            key : "MegaCredits",
+            value : 14
+        }
+    ],
+    changePlayerResources :
+    [
+        {
+            key : "MegaCredits",
+            changeValue : -14
+        },
         {
             key : "Titanium",
             changeValue : 2
         }
-    ]    
+    ],
+    changeGlobalParameter : 
+    {
+        key : "globalTemperature",
+        addValue : 1
+    }   
 }

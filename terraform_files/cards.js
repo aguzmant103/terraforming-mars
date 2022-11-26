@@ -6,8 +6,19 @@ exports.card009 = exports.card004 = exports.card003 = exports.card002 = exports.
 exports.card001 = {
     code: "card001",
     name: "Colonizer Training Camp",
-    cost: 8,
-    requirement: {
+    requiredResources: [
+        {
+            key: "MegaCredits",
+            value: 8
+        }
+    ],
+    changePlayerResources: [
+        {
+            key: "MegaCredits",
+            changeValue: -8
+        }
+    ],
+    requiredGlobalParameter: {
         key: "globalOxygen",
         higherOrEqual: false,
         value: 5,
@@ -20,7 +31,18 @@ exports.card001 = {
 exports.card002 = {
     code: "card002",
     name: "Asteroid Mining Consortium",
-    cost: 13,
+    requiredResources: [
+        {
+            key: "MegaCredits",
+            value: 13
+        }
+    ],
+    changePlayerResources: [
+        {
+            key: "MegaCredits",
+            changeValue: -13
+        }
+    ],
     changePlayerProduction: [
         {
             key: "Titanium",
@@ -35,7 +57,18 @@ exports.card002 = {
 exports.card003 = {
     code: "card003",
     name: "Deep Well Heating",
-    cost: 13,
+    requiredResources: [
+        {
+            key: "MegaCredits",
+            value: 13
+        }
+    ],
+    changePlayerResources: [
+        {
+            key: "MegaCredits",
+            changeValue: -13
+        }
+    ],
     changeGlobalParameter: {
         key: "globalTemperature",
         addValue: 1
@@ -50,8 +83,19 @@ exports.card003 = {
 exports.card004 = {
     code: "card004",
     name: "Cloud Seeding",
-    cost: 11,
-    requirement: {
+    requiredResources: [
+        {
+            key: "MegaCredits",
+            value: 11
+        }
+    ],
+    changePlayerResources: [
+        {
+            key: "MegaCredits",
+            changeValue: -11
+        }
+    ],
+    requiredGlobalParameter: {
         key: "globalOxygen",
         higherOrEqual: true,
         value: 3,
@@ -70,15 +114,24 @@ exports.card004 = {
 exports.card009 = {
     code: "card009",
     name: "Asteroid",
-    cost: 14,
-    changeGlobalParameter: {
-        key: "globalTemperature",
-        addValue: 1
-    },
+    requiredResources: [
+        {
+            key: "MegaCredits",
+            value: 14
+        }
+    ],
     changePlayerResources: [
+        {
+            key: "MegaCredits",
+            changeValue: -14
+        },
         {
             key: "Titanium",
             changeValue: 2
         }
-    ]
+    ],
+    changeGlobalParameter: {
+        key: "globalTemperature",
+        addValue: 1
+    }
 };

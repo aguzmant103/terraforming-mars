@@ -13,20 +13,20 @@ class Player {
             terraformPoints: 0,
             victoryPoints: 0
         };
-        this.currentcards = []; //Example // Pending: to clean this. // Pending to reduce scope
+        this.playerCards = []; //Example // Pending: to clean this. // Pending to reduce scope
         this.playerProduction = {
             MegaCredits: 1,
             Steel: 1,
-            Titanum: 1,
+            Titanium: 1,
             Plants: 1,
             Energy: 1,
             Heat: 1
         };
         // Pending: player belongs to a specific Game
-        this.currentResources = {
+        this.playerResources = {
             MegaCredits: 0,
             Steel: 0,
-            Titanum: 0,
+            Titanium: 0,
             Plants: 0,
             Energy: 0,
             Heat: 0
@@ -37,48 +37,72 @@ class Player {
     // ==== METHODS ====
     //Pending to implement
     listCards() {
-        return this.currentcards;
+        return this.playerCards;
+    }
+    listProduction() {
+        return this.playerProduction;
+    }
+    listResources() {
+        return this.playerResources;
     }
     playCard(cardCode) {
-        // 1. Check card is valid for the player.
+        // 1. Check card if card is available for the player.
         const playableCard = returnCardInPlayer(cardCode, this);
         if (playableCard === undefined) {
             throw new Error(`${this.name} does not have this card`);
         }
         // 2. Check that the preconditions for the card effects hold
-        if (playableCard.requirement != undefined) {
-            let { key, higherOrEqual, value } = playableCard.requirement;
+        // 2.1 Check that the requiredGlobalParameter are met
+        if (playableCard.requiredGlobalParameter != undefined) {
+            let { key, higherOrEqual, value } = playableCard.requiredGlobalParameter;
             // Check if the requirements are fulfilled. The 'higherOrEqual' boolean selects which comparison to make.
             const reqFulfilled = higherOrEqual ? this.game.globalParameters[key] >= value : this.game.globalParameters[key] <= value;
             if (!reqFulfilled) {
                 throw new Error('The global parameter requirements are not met.');
             }
-            //const key = playableCard?.changeGlobalParameter?.key;
-            //const value = playableCard?.changeGlobalParameter?.addValue;
-            this.game.globalParameters[key] += value;
         }
-        // 2.1. Check the resources are available
-        // 2.1. Check the globalParameters are available
-        // Pending: implement the rest of cases like changing production and requirements checking
-        if (playableCard.changeGlobalParameter != undefined) {
-            const key = playableCard?.changeGlobalParameter?.key;
-            const value = playableCard?.changeGlobalParameter?.addValue;
-            this.game.globalParameters[key] += value;
+        // 2.2 Check that the requiredResources are met
+        for (const resource of playableCard.requiredResources) {
+            if (resource.value > this.playerResources[resource.key]) {
+                throw new Error(`Not enough ${resource.key} available to play "${playableCard.name}".`);
+            }
         }
         // 3. Perform the transitions
         // 3.1 Change Global Parameters
+        if (playableCard.changeGlobalParameter != undefined) {
+            const { key, addValue } = playableCard?.changeGlobalParameter;
+            this.game.globalParameters[key] += addValue;
+        }
         // 3.2 Change Player Resources
+        if (playableCard.changePlayerResources != undefined) {
+            for (const resource of playableCard.changePlayerResources) {
+                const { key, changeValue } = resource;
+                this.playerResources[key] += changeValue;
+            }
+        }
         // 3.3 Change Player Production
+        if (playableCard.changePlayerProduction != undefined) {
+            for (const production of playableCard.changePlayerProduction) {
+                const { key, changeValue } = production;
+                this.playerProduction[key] += changeValue;
+            }
+        }
         // 3.4 Remove card from list
+        const index = this.playerCards.indexOf(playableCard);
+        this.playerCards.splice(index, 1);
         // 3.4 Add Logs
         /*   logAction(this, "played",playableCard.name) */
     }
+    addResource(resource, value) {
+        this.playerResources[resource] += value;
+        return this;
+    }
     withStartCards() {
-        this.currentcards = [cards_1.card003];
+        this.playerCards = [cards_1.card003];
         return this;
     }
     addCard(addCard) {
-        this.currentcards.push(addCard);
+        this.playerCards.push(addCard);
         return this;
     }
 }

@@ -13,7 +13,7 @@ const cards_1 = require("./terraform_files/cards");
 // //                        .titled("Super Mushrooms x3")
 console.log("");
 console.log("      WELCOME TO THE TESTING GROUNDS OF TERRAFORMING MARS!     ");
-console.log(`
+/* console.log(`
 MMMMMMMMMMMMMMMMMMMMMMMMMMMWWWWWMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 MMMMMMMMMMMMMMMMMMMWXOxollcccccccclloxOXWMMMMMMMMMMMMMMMMMMM
 MMMMMMMMMMMMMMMN0dl::clodkOO0000OOkdolc::cd0NMMMMMMMMMMMMMMM
@@ -44,7 +44,7 @@ MMMMMMMMMMMMMNOo:;:ox0XNWMMMMMMMMMMWNX0xl:;:o0NMMMMMMMMMMMMM
 MMMMMMMMMMMMMMMMWKkoc::ccclloooollccc::cokKWMMMMMMMMMMMMMMMM
 MMMMMMMMMMMMMMMMMMMMMWXKOkxddddddxkOKXWMMMMMMMMMMMMMMMMMMMMM
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-`);
+`) */
 console.log("");
 console.log("1. INITIALIZING TWO GAMES");
 let game1 = new terraform_files_1.Game();
@@ -72,9 +72,19 @@ catch (error)
     console.error(error);
 } */
 console.log("2. PLAYING A CARD");
+console.log("2.1 ADDING MEGACREDITS TO PLAYER");
+game2.player("Mark")?.addResource("MegaCredits", 20);
+console.log("2.2a SHOWING PARAMETERS BEFORE THE CARD");
 console.log(game2.globalParameters);
+console.log(game2.player("Mark")?.listResources());
+console.log(game2.player("Mark")?.listProduction());
+console.log(game2.player("Mark")?.listCards());
+console.log("2.2b SHOWING PARAMETERS AFTER THE CARD");
 game2.player("Mark")?.playCard("card003");
 console.log(game2.globalParameters);
+console.log(game2.player("Mark")?.listResources());
+console.log(game2.player("Mark")?.listProduction());
+console.log(game2.player("Mark")?.listCards());
 /* static newDraft(seller: Seller): DraftListing {
     return new ConcreteListing(this._nextId++, seller) as DraftListing;
 }

@@ -30,7 +30,8 @@ The following features have being deliveratively left out from implementation fr
 To exemplify the usage of different OOP concepts, the following list was compiled:
 
 Basic elements:
-- [x] Destructuring - "./players" Line 55
+- [X] Type Aliases "./cards" Line 15, 16, 17
+- [x] Destructuring "./players" Line 55, 72
 - [x] For...of Loops "./terraform" Line 42
 - [] For...in Loops
 
