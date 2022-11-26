@@ -30,18 +30,15 @@ The following features have being deliveratively left out from implementation fr
 To exemplify the usage of different OOP concepts, the following list was compiled:
 
 Basic elements:
-
 - [x] Destructuring - "./players" Line 55
 - [x] For...of Loops "./terraform" Line 42
 - [] For...in Loops
 
 Usage of data structures:
-
 - [] Stack
 - [] LinkedList
 
 Usage of elements:
-
 - [] Static Types
 - [] Construction and deconstructing
 - [] Types: for Lightweight data
@@ -54,12 +51,10 @@ Usage of elements:
 - [] Usage of private and not exportable methods
 
 Usage of advanced elements:
-
 - [] Polymorphic
 - [] Function overloading
 
 Usage of idiomatic features>
-
 - []
 
 Usage of Design Patterns:
