@@ -41,7 +41,7 @@ To exemplify the usage of different OOP concepts, the following list was compile
 - [X] For...of Loops "./terraform" Line 45
 - [] For...in Loops
 
-More elements:
+##### More elements:
 - [] Classes:
     - Single Responsibility Principle
     - Dependency
@@ -50,47 +50,44 @@ More elements:
 - [] Interfaces
 - [] Usage of private and not exportable methods
 
-Usage of data structures:
+##### Usage of data structures:
 - [X] Stack "./logs" Line 5
 - [] LinkedList
 
-Usage of advanced elements:
+##### Usage of advanced elements:
 - [] Polymorphism in sub-typing (including inheritance and interface extension)
 - [] Polymorphism in function overloading (multiple call signatures)
 - [X] Generics - Polymorphism in parametric polymorphism "./logs" Line 5
 
-Usage of idiomatic features:
-- []
-
-Usage of Design Patterns:
+##### Usage of Design Patterns:
 - [X] Façade Pattern: data management
 - [] Factory Pattern
 - [] State Pattern
 - [] Builder Pattern
 - [] Fluint
 
-Usage of principles and concepts:
+##### Usage of principles and concepts:
 - [] SOLID
 
-Organization:
+##### Organization:
 - [X] Single folder: can be found under the folder "terraform_files"
 - [X] Index: can be found under "terraform_files/index.ts"
 - [] Export and local elements
 
-Extra Points:
+##### Extra Points:
 - [] Recursion
 
-Documentation:
+##### Documentation:
 - [] Add one line per method
 - [] Except terribly basic (1-2 lines of code)
 
-Style:
+##### Style:
 - [] Usage of TSList
 
-Readme
+##### Readme
 - [X] Here explains the background, list of elements looked, and how to run it.
 
-Specifications:
+##### Specifications:
 - [X] Multiple independent instances of Game "./test" Line 17
 - [] Game show data
 - [] Prevent illegal actions!
@@ -99,13 +96,10 @@ Specifications:
 - [] Don't use classes for small things
 - [] Usage of static types
 - [] Basic structure types to be more specific with input parameters.
-
 - [] Global Parameters are not publicly accesible
 - [] Game has sole responsibility for action execution and/or information exposure instead of  sub-components. 
-
-
 - Safe execution:
-- 		c. Code executing illegal actions must not compile (preferred), or it must otherwise raise error at runtime. This includes playing illegal moves and other illegal modification of the game state/information. In other words, the public methods and properties of the Game class and any sub-components which it exposes must not allow illegal actions to be performed. Common issues: 
-			i. Methods can be successfully invoked with illegal parameters, or in illegal order. 
-			ii. Mutable public properties allow illegal values to be set.
- Read-only properties expose objects which can themselves be illegally modified. 
+  - The public methods and properties of the Game class and any sub-components which it exposes must not allow illegal actions to be performed.
+  - Methods can be successfully invoked with illegal parameters, or in illegal order. 
+	- Mutable public properties allow illegal values to be set.
+  - Read-only properties expose objects which can themselves be illegally modified. 

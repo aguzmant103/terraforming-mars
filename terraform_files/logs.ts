@@ -55,13 +55,15 @@ class Log {
     }
   }
   
-
+/** 
+  Implementation of a Stack of Logs.
+*/
 export class LogStack {
     // A stack for storing the logs
     public logs: Stack<Log>;
   
     // The maximum number of logs that can be stored in the stack
-    public maxSize: number;
+    public maxSize:     number;
   
     // A constructor for creating a new LogStack instance
     constructor(maxSize: number) {
