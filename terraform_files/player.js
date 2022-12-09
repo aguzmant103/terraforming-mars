@@ -8,7 +8,7 @@ class Player {
     constructor(name, game) {
         this.name = name;
         this.game = game;
-        /* Can this be initialized simpler? */
+        /* PENDING: Can this be initialized simpler? */
         this.playerPoints = {
             terraformPoints: 0,
             victoryPoints: 0
@@ -97,8 +97,15 @@ class Player {
         this.playerResources[resource] += value;
         return this;
     }
+    /*     // Pending: add 3 random cards from the list
+        withStartCards(): this
+        {
+            this.playerCards = [card003];
+            return this;
+        }    // Pending: add 3 random cards from the list */
     withStartCards() {
-        this.playerCards = [cards_1.card003];
+        this.playerCards = [];
+        this.playerCards.push(randomCard(), randomCard(), randomCard());
         return this;
     }
     addCard(addCard) {
@@ -111,6 +118,12 @@ exports.Player = Player;
 function returnCardInPlayer(codeToSearch, playerToSearch) {
     const returningCard = playerToSearch.listCards().find(element => element.code === codeToSearch);
     return returningCard;
+}
+/**
+ * Helper function that returns a random card from the available cards in the game.
+ */
+function randomCard() {
+    return cards_1.cardList[Math.floor(Math.random() * cards_1.cardList.length)]; //Explicitely ignoring the undefined case as the cardList array will always be initialized with cards (this IS the available cards list)
 }
 /* class Player
 Properties:

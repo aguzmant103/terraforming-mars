@@ -13,6 +13,7 @@ import { resources, R } from "./resources";
 // Pending: is this needed? Check export imports too
 export type availableCards = "card001" | "card002" | "card003" | "card004" | "card005" | "card009";
 
+
 type GP = "globalOxygen" | "globalOcean" | "globalTemperature";
 type PP = "terraformPoints" | "victoryPoints";
 
@@ -185,3 +186,5 @@ export const card009 : card =
         addValue : 1
     }   
 }
+
+export const cardList = [card001, card002, card003, card004, card009];

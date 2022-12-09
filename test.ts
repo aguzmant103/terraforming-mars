@@ -11,60 +11,26 @@ import { card003, card004, card009 } from "./terraform_files/cards";
 
 // // const listing = Listing.newDraft(seller)
 // //                        .titled("Super Mushrooms x3")
-console.log("");
-console.log("      WELCOME TO THE TESTING GROUNDS OF TERRAFORMING MARS!     ");
-/* console.log(`
-MMMMMMMMMMMMMMMMMMMMMMMMMMMWWWWWMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMMWXOxollcccccccclloxOXWMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMN0dl::clodkOO0000OOkdolc::cd0NMMMMMMMMMMMMMMM
-MMMMMMMMMMMMNOo:;cd0XWMMMMMMMMMMMMMMMMWX0dc;:oONMMMMMMMMMMMM
-MMMMMMMMMMXx:;lkXWMMMWNNXXXNWMMMMMMMMMMMMMWXkl;:xXMMMMMMMMMM
-MMMMMMMMXd,..:xOOOkdlc:cccc:ccloxkkOOO0KKXXXKOc..;xNMMMMMMMM
-MMMMMMWO;,d0kolccccldkOOOO0K0xdolccccccccccccclxOd,:OWMMMMMM
-MMMMMNd'cKMMMMMMWWMXxc::c:;lKMMMMMMMMMWWWNNNNWMMMW0:'dNMMMMM
-MMMMXl'oNMMMMMMMMMNl.l0XNXl.oWMMMMMMMMMMMMMMMMMMMMMNo'lNMMMM
-MMMNl.:OKNWMMMMMMMNd':ddo:;lKWWNXXXNWMMMMMMMMMMWNXXXKl.oNMMM
-MMWx..:cc:clxO00KXWNOollokKXkc:::cc::lxKNNNNKklc:ccc:,..xWMM
-MMK;,OWWNKkolcccc::lx0XNX0d;;ok0XNNXOoc::ccc:coOKNNNKOl.;KMM
-MMx.lWMMMMMMMWWWNXOoc:cc::cxXMMMWK0KNMWNXKKXNWMMMMMMMMWl.xMM
-MWl.kMMMMMMMMMMMMMMMWNNXXNWMMN0x:;c::xNMMMMMMMMMMMMMMMMx.lWM
-MNc'OMMMMMMMMMMMMMMMMMMMMMMMNl..lXW0,'OMMMMMMMMMMMMMMMMO'cNM
-MNc'OMMMMMMMMMMMMMMMMMMMMMMMWd,':xd:,oXMMMMMMMMMMMMMMMMk.cNM
-MWo.xWWNWMMMMMMMMMMMMMMMMMMMMWX0olld0WMMMMMMMMWNXNWMMMMd.oWM
-MMO..:ccccloxXWMWKkxOKWWWNXKXNWWMWX0OOOkkkxddoc:c::dKXK:'OMM
-MMNc.l0K0kdo:;cl:;clc::cc:cc::cccc::ccccclllolloO0xc::,.cNMM
-MMM0,;KMMMMMN0xddlclkK000XNNNK0OO0KNWMMMMMMNk:::,lXWNk',0MMM
-MMMWk':KMMMMMMMO;,c''0MMMMMMMMMMMMMMMMMMMMWx.cKK;'0MK:'kWMMM
-MMMMWk,;0WMMMMMO,,:;oXMMMMMMMMMMMMMMMMMMMMWx.:x:'dN0;,kWMMMM
-MMMMMW0:,dKNWMMWXOOKWMMMMMMMMMMMMMMMMMMWNXXKxcclk0d,:0WMMMMM
-MMMMMMMXd'.';ldolcccclxO0KNWNXK0kkxdoolc:cccccc:'.'dXMMMMMMM
-MMMMMMMMWKl...:odOKKOocccc:cc::ccllloodkKXXK0d;..lKWMMMMMMMM
-MMMMMMMMMMWKd:;lkXWMMMMMWNXKKXNWMMMMMMMMMWXkc;:dKWMMMMMMMMMM
-MMMMMMMMMMMMMNOo:;:ox0XNWMMMMMMMMMMWNX0xl:;:o0NMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMWKkoc::ccclloooollccc::cokKWMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMMMMWXKOkxddddddxkOKXWMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-`) */
-console.log("");
+console.log("  \n    WELCOME TO THE TESTING GROUNDS OF TERRAFORMING MARS!    \n ");
 console.log("1. INITIALIZING TWO GAMES");
 let game1 = new Game ();
 let game2 = new Game ();
-// console.log(game2);
+// console.log(game2); // <- Check the different Game IDs
 
 console.log("1.1. ADDING NEW PLAYER");
 game2.newPlayer("Steve");
-//console.log(game2.player("Steve"));
+// console.log(game2.getPlayer("Steve")); // <- Check the information of the player
 
 console.log("1.2. ADDING ANOTHER PLAYER WITH START CARDS");
-game2.newPlayer("Mark").withStartCards();
-//console.log(game2.player("Mark")?.listCards());
+game2.newPlayer("Mark").withStartCards(); // <- withStardCards initializes a player's deck with 3 random cards.. 
+// console.log(game2.getPlayer("Mark")?.listCards()); // <- Check the cards available on this player
 
 console.log("1.3. ADDING CARDS TO A PLAYER"); // Pending: this is a test that requires cardCodes or something
-game2.player("Mark")?.addCard(card004).addCard(card009); 
-//console.log(game2.player("Mark")?.listCards());
+game2.getPlayer("Mark")?.addCard(card004).addCard(card009); 
+//console.log(game2.getPlayer("Mark")?.listCards());
 
 console.log("1.4 LISTING CARDS OF A NON-EXISTING PLAYER");
-//console.log(game2.player("IronMan")?.listCards());
+//console.log(game2.getPlayer("IronMan")?.listCards());
 
 //console.log("2. PLAY A CARD THAT DOES NOT EXIST");
 console.log("2. PLAY A CARD THE PLAYER DOES NOT HAVE");
@@ -78,13 +44,27 @@ catch (error)
 } */
 console.log("2. PLAYING A CARD");
 console.log("2.1 ADDING MEGACREDITS TO PLAYER");
-game2.player("Mark")?.addResource("MegaCredits",20);
+// game2.getPlayer("Mark")?.addResource("MegaCredits",20);
 
 console.log("2.2a SHOWING PARAMETERS BEFORE THE CARD");
 /* console.log(game2.globalParameters);
-console.log(game2.player("Mark")?.listResources());
-console.log(game2.player("Mark")?.listProduction());
-console.log(game2.player("Mark")?.listCards()); */
+console.log(game2.getPlayer("Mark")?.listResources());
+console.log(game2.getPlayer("Mark")?.listProduction());
+console.log(game2.getPlayer("Mark")?.listCards()); */
 
 console.log("2.2b SHOWING PARAMETERS AFTER THE CARD");
 game2.playCard("Mark","card003");
+/* game2.getPlayer("Mark")?.addCard(card003);
+
+ */
+/* 
+    NEXT
+0. Implement logs, try to implement an advanced feature
+1. Need to refactor the test and functions to work more as a facade
+2. Add the list of facade commands to the readme
+3. Check how the errors are being managed.
+4. Decide to go to:
+- Continue with the Game implementation
+- Try to pursue refactoring to get the description of the assignment
+
+*/

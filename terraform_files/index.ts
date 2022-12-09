@@ -7,6 +7,7 @@
 // See https://www.typescriptlang.org/docs/handbook/modules.html#re-exports
 export { Game } from "./terraform";
 export { Player } from "./player";
+export { cardList } from "./cards";
 // export { Price } from "./price";
 // export { Listing, DraftListing, ActiveListing,
 //          SoldListing, CancelledListing, Time } from "./listing";

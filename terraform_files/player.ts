@@ -1,9 +1,9 @@
-import { resources, R } from "./resources"
-import { card, card003, card004, availableCards } from "./cards"
+import { resources, R } from "./resources";
+import { card, cardList, card004, availableCards } from "./cards";
 import { Game } from "./terraform";
 // Pending to implement
 export class Player {
-    /* Can this be initialized simpler? */
+    /* PENDING: Can this be initialized simpler? */
     readonly playerPoints = {
         terraformPoints : 0,
         victoryPoints : 0
@@ -116,12 +116,19 @@ export class Player {
         this.playerResources[resource] += value;
         return this;
     }
+/*     // Pending: add 3 random cards from the list
     withStartCards(): this 
     {
         this.playerCards = [card003];
         return this;
+    }    // Pending: add 3 random cards from the list */
+    withStartCards(): this 
+    {
+        this.playerCards = [];
+        this.playerCards.push(randomCard(), randomCard(), randomCard());
+        return this;
     }
-    addCard(addCard: card): this 
+    addCard(addCard: card): this
     {
         this.playerCards.push(addCard);
         return this;
@@ -132,6 +139,14 @@ export class Player {
 function returnCardInPlayer (codeToSearch : string, playerToSearch : Player ) : card | undefined {
     const returningCard = playerToSearch.listCards().find(element => element.code === codeToSearch);
     return returningCard;
+}
+
+
+/**
+ * Helper function that returns a random card from the available cards in the game.
+ */
+function randomCard(){
+    return cardList[Math.floor(Math.random() * cardList.length)] as card; //Explicitely ignoring the undefined case as the cardList array will always be initialized with cards (this IS the available cards list)
 }
 
 /* class Player

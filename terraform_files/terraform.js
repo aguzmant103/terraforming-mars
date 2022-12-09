@@ -29,7 +29,7 @@ class Game {
      */
     // Pending: need to make this private and only playable with cards.
     editGlobalParameter(...values) {
-        /*         // Pending: need stronger type checkers here and guardrails
+        /*      // Pending: need stronger type checkers here and guardrails
                 // Pending: how to prevent it overflows
                 // Pending: how to prevent garbish values are entered during runtime */
         for (const element of values) {
@@ -42,8 +42,11 @@ class Game {
     * Throws an error if the player does not have the card.
     */
     playCard(playerName, card) {
-        this.player(playerName)?.playCard(card);
+        this.getPlayer(playerName)?.playCard(card);
     }
+    /**
+    * Creates a new player and adds it to this game.
+    */
     newPlayer(playerName) {
         const player = new player_1.Player(playerName, this);
         this.players.push(player);
@@ -53,7 +56,7 @@ class Game {
      * Returns the first player with the queried name, or undefined if one does not exist.
      * Pending: No duplication of player names is possible
      */
-    player(name) {
+    getPlayer(name) {
         return this.players.find(element => element.name === name);
     }
 }

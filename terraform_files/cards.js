@@ -2,7 +2,7 @@
 /*  There are 371 cards according to https://ssimeonoff.github.io/cards-list.
     From this list, only 2 cards are implemented to exemplify the game mechanics. */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.card009 = exports.card004 = exports.card003 = exports.card002 = exports.card001 = void 0;
+exports.cardList = exports.card009 = exports.card004 = exports.card003 = exports.card002 = exports.card001 = void 0;
 exports.card001 = {
     code: "card001",
     name: "Colonizer Training Camp",
@@ -135,3 +135,4 @@ exports.card009 = {
         addValue: 1
     }
 };
+exports.cardList = [exports.card001, exports.card002, exports.card003, exports.card004, exports.card009];

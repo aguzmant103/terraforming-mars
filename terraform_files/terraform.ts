@@ -27,8 +27,6 @@ export class Game {
      */
     readonly players: Player[] = [];
 
-
-
     constructor(){
         // Automatically generate UID for this instance. Increase global counter
         this.gameId = Game._nextID++;
@@ -41,7 +39,7 @@ export class Game {
      */
     // Pending: need to make this private and only playable with cards.
     editGlobalParameter(...values: {key : "globalOxygen" | "globalOcean" | "globalTemperature" , addValue : number}[]) : GlobalParameters {
-/*         // Pending: need stronger type checkers here and guardrails
+/*      // Pending: need stronger type checkers here and guardrails
         // Pending: how to prevent it overflows
         // Pending: how to prevent garbish values are entered during runtime */
         for (const element of values){
@@ -54,9 +52,11 @@ export class Game {
     * Throws an error if the player does not have the card. 
     */
     playCard(playerName : string, card : string){
-        this.player(playerName)?.playCard(card);
+        this.getPlayer(playerName)?.playCard(card);
     }
-
+    /** 
+    * Creates a new player and adds it to this game.
+    */
     newPlayer(playerName : string) : Player {
         const player = new Player (playerName, this);
         this.players.push(player);
@@ -66,16 +66,7 @@ export class Game {
      * Returns the first player with the queried name, or undefined if one does not exist.
      * Pending: No duplication of player names is possible
      */
-    player(name: string): Player|undefined {
+    getPlayer(name: string): Player|undefined {
         return this.players.find(element => element.name === name);
     }
-/* static newDraft(seller: Seller): DraftListing {
-    return new ConcreteListing(this._nextId++, seller) as DraftListing;
-}
-
-titled(title: string): this & {title: string} {
-    this.title = title;
-    return this as this & {title: string};
-} */
-
 }
