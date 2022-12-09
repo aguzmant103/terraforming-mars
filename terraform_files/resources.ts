@@ -1,7 +1,5 @@
-/// Pending: need to restrict this more
 
 export type R = "MegaCredits" |"Steel" | "Titanium" | "Plants" | "Energy" | "Heat";
-
 export type resources = {
     MegaCredits : number,
     Steel : number,

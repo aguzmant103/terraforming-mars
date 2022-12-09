@@ -10,13 +10,10 @@
 import { R } from "./resources";
 
 // Pending: is this needed? Check export imports too
-export type availableCards = "card001" | "card002" | "card003" | "card004" | "card005" | "card009";
-
-
+type availableCards = "card001" | "card002" | "card003" | "card004" | "card005" | "card009" | "card011" | "card013";
 type GP = "globalOxygen" | "globalOcean" | "globalTemperature";
 type PP = "terraformPoints" | "victoryPoints";
 
-// Pending: need to  restrict more the number type
 export type card = 
 {
     code : string,
@@ -156,7 +153,6 @@ export const card004 : card =
         }
     ]   
 }
-
 export const card009 : card = 
 {
     code : "card009",
@@ -185,7 +181,6 @@ export const card009 : card =
         changeValue : 1
     }   
 }
-
 export const card011 : card = 
 {
     code : "card011",
@@ -210,7 +205,6 @@ export const card011 : card =
         changeValue : 5,
     }  
 }
-
 export const card013 : card = 
 {
     code : "card013",

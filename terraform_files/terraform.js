@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Game = void 0;
-// Check there are no refernces for Marketplace, User, Buyer, Seller, etc.
+// Pending: Check there are no refernces for Marketplace, User, Buyer, Seller, etc.
 // PENDING: Imports everything from the other submodules
 const player_1 = require("./player");
 const logs_1 = require("./logs");

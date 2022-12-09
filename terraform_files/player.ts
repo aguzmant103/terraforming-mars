@@ -1,15 +1,13 @@
 import { resources, R } from "./resources";
-import { card, cardList, card004, availableCards } from "./cards";
+import { card, cardList} from "./cards";
 import { Game } from "./terraform";
-// Pending to implement
+
 export class Player {
-    /* PENDING: Can this be initialized simpler? */
+    private playerCards : card[] = [];
     readonly playerPoints = {
         terraformPoints : 0,
         victoryPoints : 0
     }
-    private playerCards : card[] = []; //Example // Pending: to clean this. // Pending to reduce scope
-
     private playerProduction = 
     {
         MegaCredits : 1,
@@ -19,7 +17,6 @@ export class Player {
         Energy : 1,
         Heat : 1
     };
-    // Pending: player belongs to a specific Game
     readonly playerResources : resources = {
         MegaCredits : 0,
         Steel : 0,
@@ -28,27 +25,36 @@ export class Player {
         Energy : 0,
         Heat : 0
 }   
-    /* Pending: Can this be initialized simpler? */
     constructor (readonly name : string, readonly game : Game){
         this.name = name;    
         this.game = game;           
     }
     // ==== METHODS ====
 
-    //Pending to implement
-    
+    /**
+        List all player cards.
+    */
     public listCards ()
     {
         return this.playerCards
     }
+    /**
+        List player production stats.
+    */
     public listProduction() 
     {
         return this.playerProduction;
     }
+    /**
+        List player available resources.
+    */
     public listResources ()
     {
         return this.playerResources;
     }
+    /**
+        Play a card player´s card.
+    */
     public playCard (cardCode : string) 
     {   
         // 1. Check card if card is available for the player.
@@ -69,6 +75,7 @@ export class Player {
                 throw new Error ('The global parameter requirements are not met.');
             }
         }
+
         // 2.2 Check that the requiredResources are met
         for (const resource of playableCard.requiredResources){
             if (resource.reqValue > this.playerResources[resource.key])
@@ -104,6 +111,7 @@ export class Player {
                 this.playerProduction[key] += changeValue;
             }
         }
+
         // 3.4 Remove card from list
         const index = this.playerCards.indexOf(playableCard);
         this.playerCards.splice(index, 1);
@@ -111,6 +119,16 @@ export class Player {
         // 3.5 Add Logs
         this.game.logs.log(`${this.name} played ${cardCode}.`);
     }
+
+    /** 
+        Buy a card if the player has the resources.    
+    */
+    buyCard(newCard: card): this
+    {
+        this.game.logs.log(`${this.playCard.name} bought ${newCard.code}`);
+        return this;
+    }
+
     private addResource(resource : R, value : number): this 
     {
         this.playerResources[resource] += value;
@@ -123,11 +141,13 @@ export class Player {
         this.playerCards.push(randomCard(), randomCard(), randomCard());
         return this;
     }
-    addCard(addCard: card): this
+    private addCard(newCard: card): this
     {
-        this.playerCards.push(addCard);
+        this.playerCards.push(newCard);
         return this;
     }
+
+
 }
 /** 
     Helper function to find a card in a player or return undefined. This does not need to be exported. 
@@ -136,7 +156,6 @@ function returnCardInPlayer (codeToSearch : string, playerToSearch : Player ) : 
     const returningCard = playerToSearch.listCards().find(element => element.code === codeToSearch);
     return returningCard;
 }
-
 
 /**
  * Helper function that returns a random card from the available cards in the game.

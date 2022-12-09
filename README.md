@@ -28,7 +28,6 @@ Alternatively:
 
 ## Out of Scope
 The following features have being deliveratively left out from implementation from the original game:
-
 - Tags
 - Awards
 - Actions 

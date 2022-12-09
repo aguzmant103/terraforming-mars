@@ -23,7 +23,7 @@ console.log("1.2. ADDING ANOTHER PLAYER WITH START CARDS");
 game2.newPlayer("Mark").withStartCards(); // <- withStardCards initializes a player's deck with 3 random cards.. 
 // console.log(game2.getPlayer("Mark")?.listCards()); // <- Check the cards available on this player
 console.log("1.3. ADDING CARDS TO A PLAYER"); // Pending: this is a test that requires cardCodes or something
-game2.getPlayer("Mark")?.addCard(cards_1.card004).addCard(cards_1.card009);
+game2.getPlayer("Mark")?.buyCard(cards_1.card004).buyCard(cards_1.card009);
 //console.log(game2.getPlayer("Mark")?.listCards());
 console.log("1.4 LISTING CARDS OF A NON-EXISTING PLAYER");
 //console.log(game2.getPlayer("IronMan")?.listCards());
@@ -47,8 +47,8 @@ console.log(game2.getPlayer("Mark")?.listResources());
 console.log(game2.getPlayer("Mark")?.listProduction());
 console.log(game2.getPlayer("Mark")?.listCards()); */
 console.log("2.1c SHOWING PARAMETERS AFTER THE CARD");
-game2.getPlayer("Steve")?.addCard(cards_1.card009);
-game2.getPlayer("Mark")?.addCard(cards_1.card003);
+game2.getPlayer("Steve")?.buyCard(cards_1.card009);
+game2.getPlayer("Mark")?.buyCard(cards_1.card003);
 game2.playCard("Steve", "card009");
 game2.playCard("Mark", "card003");
 /* console.log(game2.globalParameters);

@@ -26,7 +26,7 @@ game2.newPlayer("Mark").withStartCards(); // <- withStardCards initializes a pla
 // console.log(game2.getPlayer("Mark")?.listCards()); // <- Check the cards available on this player
 
 console.log("1.3. ADDING CARDS TO A PLAYER"); // Pending: this is a test that requires cardCodes or something
-game2.getPlayer("Mark")?.addCard(card004).addCard(card009); 
+game2.getPlayer("Mark")?.buyCard(card004).buyCard(card009); 
 //console.log(game2.getPlayer("Mark")?.listCards());
 
 console.log("1.4 LISTING CARDS OF A NON-EXISTING PLAYER");
@@ -54,8 +54,8 @@ console.log(game2.getPlayer("Mark")?.listProduction());
 console.log(game2.getPlayer("Mark")?.listCards()); */
 
 console.log("2.1c SHOWING PARAMETERS AFTER THE CARD");
-game2.getPlayer("Steve")?.addCard(card009);
-game2.getPlayer("Mark")?.addCard(card003);
+game2.getPlayer("Steve")?.buyCard(card009);
+game2.getPlayer("Mark")?.buyCard(card003);
 game2.playCard("Steve","card009");
 game2.playCard("Mark","card003");
 /* console.log(game2.globalParameters);

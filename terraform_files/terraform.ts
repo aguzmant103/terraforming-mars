@@ -1,7 +1,7 @@
-// Check there are no refernces for Marketplace, User, Buyer, Seller, etc.
+// Pending: Check there are no refernces for Marketplace, User, Buyer, Seller, etc.
 // PENDING: Imports everything from the other submodules
 import {Player} from "./player";
-import {GlobalOcean, GlobalOxygen, GlobalParameters} from "./globalParameters";
+import {GlobalParameters} from "./globalParameters";
 import {LogStack} from "./logs";
 /**
  * This Game class acts as the entry point to the players and board of a given game:
