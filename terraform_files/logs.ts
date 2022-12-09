@@ -17,7 +17,7 @@ class Stack<T> {
     }
 
     // A method for retrieving the top item on the stack without removing it from the stack
-    peek(): T {
+    peek(): T | undefined{
       if (this.isEmpty()) throw new Error("EmptyStack");
       return this.array[this.array.length - 1];
     }
@@ -59,32 +59,37 @@ class Log {
   Implementation of a Stack of Logs.
 */
 export class LogStack {
-    // A stack for storing the logs
-    public logs: Stack<Log>;
+    // A stack for storing the logs.
+    private logs: Stack<Log>;
   
-    // The maximum number of logs that can be stored in the stack
-    public maxSize:     number;
+    // The maximum number of logs that can be stored in the stack.
+    private maxSize: number;
   
-    // A constructor for creating a new LogStack instance
+    // A constructor for creating a new LogStack instance.
     constructor(maxSize: number) {
       this.logs = new Stack<Log>();
       this.maxSize = maxSize;
     }
   
-    // A method for adding a log to the stack, limitted to the maxSize
-    public push(log: Log): void {
+    // A method for adding a log to the stack, limitted to the maxSize.
+    private push(log: Log): void {
       this.logs.push(log);
       if (this.logs.size() > this.maxSize) {
         this.logs.pop();
       }
     }
   
-    // A method for retrieving the most recent log from the stack
-    public pop(): Log | undefined {
+    // A method for retrieving the most recent log from the stack.
+    private pop(): Log | undefined {
       return this.logs.pop();
     }
+
+    // A public method to add a log to the stack.
+    public log(message : string) : void {
+      this.logs.push(new Log (message));
+    }
   
-    // A method for retrieving all of the logs in the stack
+    // A method for retrieving all of the logs in the stack.
     public getAll(): Log[] {
       return this.logs.toArray();
     }

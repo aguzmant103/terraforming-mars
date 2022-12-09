@@ -38,26 +38,32 @@ catch (error)
     console.error(error);
 } */
 console.log("2. PLAYING A CARD");
-console.log("2.1 ADDING MEGACREDITS TO PLAYER");
-// game2.getPlayer("Mark")?.addResource("MegaCredits",20);
-console.log("2.2a SHOWING PARAMETERS BEFORE THE CARD");
+console.log("2.1a ADDING MEGACREDITS TO PLAYER");
+// game2.getPlayer("Mark")?.addResource("MegaCredits",40);
+// game2.getPlayer("Steve")?.addResource("MegaCredits",40); // Pending: how to do this test.
+console.log("2.1b SHOWING PARAMETERS BEFORE THE CARD");
 /* console.log(game2.globalParameters);
 console.log(game2.getPlayer("Mark")?.listResources());
 console.log(game2.getPlayer("Mark")?.listProduction());
 console.log(game2.getPlayer("Mark")?.listCards()); */
-console.log("2.2b SHOWING PARAMETERS AFTER THE CARD");
+console.log("2.1c SHOWING PARAMETERS AFTER THE CARD");
+game2.getPlayer("Steve")?.addCard(cards_1.card009);
+game2.getPlayer("Mark")?.addCard(cards_1.card003);
+game2.playCard("Steve", "card009");
 game2.playCard("Mark", "card003");
-/* game2.getPlayer("Mark")?.addCard(card003);
-
- */
+/* console.log(game2.globalParameters);
+console.log(game2.getPlayer("Mark")?.listResources());
+console.log(game2.getPlayer("Mark")?.listProduction());
+console.log(game2.getPlayer("Mark")?.listCards()); */
+console.log("3. SHOWING GAME LOGS");
+game2.logs.getAll();
+console.log(game2.logs.getAll()); // <- Prints the available logs
 /*
     NEXT
-0. Implement logs, try to implement an advanced feature
 1. Need to refactor the test and functions to work more as a facade
 2. Add the list of facade commands to the readme
 3. Check how the errors are being managed.
 4. Decide to go to:
 - Continue with the Game implementation
 - Try to pursue refactoring to get the description of the assignment
-
 */ 

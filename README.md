@@ -20,11 +20,18 @@ Alternatively:
 3. Interactively use the following commands:
 4. PENDING OF IMPLEMENTATION
 
+## Available commands
+| Column 1 | Column 2 | Column 3 |
+|----------|----------|----------|
+| Cell 1   | Cell 2   | Cell 3   |
+| Cell 4   | Cell 5   | Cell 6   |
+
 ## Out of Scope
 The following features have being deliveratively left out from implementation from the original game:
 
 - Tags
 - Awards
+- Actions 
 - Milestones
 - Complete list of Cards
 - Corporation selection for players

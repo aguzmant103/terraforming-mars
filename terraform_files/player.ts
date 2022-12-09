@@ -37,19 +37,19 @@ export class Player {
 
     //Pending to implement
     
-    listCards ()
+    public listCards ()
     {
         return this.playerCards
     }
-    listProduction() 
+    public listProduction() 
     {
         return this.playerProduction;
     }
-    listResources ()
+    public listResources ()
     {
         return this.playerResources;
     }
-    playCard (cardCode : string) 
+    public playCard (cardCode : string) 
     {   
         // 1. Check card if card is available for the player.
         const playableCard = returnCardInPlayer(cardCode, this)
@@ -62,16 +62,16 @@ export class Player {
         // 2.1 Check that the requiredGlobalParameter are met
         if (playableCard.requiredGlobalParameter != undefined)
         {
-            let {key, higherOrEqual, value } = playableCard.requiredGlobalParameter;
+            let {key, higherOrEqual, reqValue } = playableCard.requiredGlobalParameter;
             // Check if the requirements are fulfilled. The 'higherOrEqual' boolean selects which comparison to make.
-            const reqFulfilled = higherOrEqual ? this.game.globalParameters[key]>=value : this.game.globalParameters[key]<=value;
+            const reqFulfilled = higherOrEqual ? this.game.globalParameters[key]>=reqValue : this.game.globalParameters[key]<=reqValue;
             if (!reqFulfilled){
                 throw new Error ('The global parameter requirements are not met.');
             }
         }
         // 2.2 Check that the requiredResources are met
         for (const resource of playableCard.requiredResources){
-            if (resource.value > this.playerResources[resource.key])
+            if (resource.reqValue > this.playerResources[resource.key])
             {
                 throw new Error (`Not enough ${resource.key} available to play "${playableCard.name}".`)
             }
@@ -81,8 +81,8 @@ export class Player {
         // 3.1 Change Global Parameters
         if (playableCard.changeGlobalParameter != undefined)
         {
-            const { key, addValue } = playableCard?.changeGlobalParameter;
-            this.game.globalParameters[key] += addValue;
+            const { key, changeValue } = playableCard?.changeGlobalParameter;
+            this.game.globalParameters[key] += changeValue;
         }
 
         // 3.2 Change Player Resources
@@ -108,20 +108,15 @@ export class Player {
         const index = this.playerCards.indexOf(playableCard);
         this.playerCards.splice(index, 1);
 
-        // 3.4 Add Logs
-        /*   logAction(this, "played",playableCard.name) */
+        // 3.5 Add Logs
+        this.game.logs.log(`${this.name} played ${cardCode}.`);
     }
-    addResource(resource : R, value : number): this 
+    private addResource(resource : R, value : number): this 
     {
         this.playerResources[resource] += value;
+        this.game.logs.log(`${value + " " + resource} to ${this.name}`);
         return this;
     }
-/*     // Pending: add 3 random cards from the list
-    withStartCards(): this 
-    {
-        this.playerCards = [card003];
-        return this;
-    }    // Pending: add 3 random cards from the list */
     withStartCards(): this 
     {
         this.playerCards = [];
@@ -133,9 +128,10 @@ export class Player {
         this.playerCards.push(addCard);
         return this;
     }
-
 }
-/* This is a helper function to find a card in a player or return undefined. This does not need to be exported. */
+/** 
+    Helper function to find a card in a player or return undefined. This does not need to be exported. 
+ */
 function returnCardInPlayer (codeToSearch : string, playerToSearch : Player ) : card | undefined {
     const returningCard = playerToSearch.listCards().find(element => element.code === codeToSearch);
     return returningCard;
@@ -153,28 +149,10 @@ function randomCard(){
 Properties:
     type Player Information (de
         Properties
-            Corporation
-            Terraforming Points
-            Tags
-            Actions
-            Effects
-            Victory Points
-            Current Cards
-            Resources Current 
-                Mega Credits
-                Steel
-                Titanium
-                Plants
-                Energy
-                Heat
-            Resource Production stats
-                Mega Credits
-                Steel
-                Titanium
-                Plants
-                Energy
-                Heat
-                
+            Corporation // Not
+            Tags // Not
+            Actions // Not
+            Effects // Not       
 Constructor:
     Name
     (corporation, …)

@@ -7,8 +7,7 @@
 - Revealing or drawing cards from the deck
 - Victory Points dependant on other factors */
 
-import { GlobalParameters } from "./globalParameters";
-import { resources, R } from "./resources";
+import { R } from "./resources";
 
 // Pending: is this needed? Check export imports too
 export type availableCards = "card001" | "card002" | "card003" | "card004" | "card005" | "card009";
@@ -17,15 +16,14 @@ export type availableCards = "card001" | "card002" | "card003" | "card004" | "ca
 type GP = "globalOxygen" | "globalOcean" | "globalTemperature";
 type PP = "terraformPoints" | "victoryPoints";
 
-// Pending: need to  restrict more the number type and also align the naming
+// Pending: need to  restrict more the number type
 export type card = 
 {
     code : string,
     name : string,
-    requiredResources : {key : R, value : number}[],
-    requiredGlobalParameter? : {key : GP , higherOrEqual : boolean , value : number},
-    // PENDING: requiredPlayerProduction
-    changeGlobalParameter? : {key : GP , addValue : number},
+    requiredResources : {key : R, reqValue : number}[],
+    requiredGlobalParameter? : {key : GP , higherOrEqual : boolean , reqValue : number},
+    changeGlobalParameter? : {key : GP , changeValue : number},
     changePlayerProduction? : {key : R , changeValue : number}[],
     changePlayerPoints? : {key : PP , changeValue : number},
     changePlayerResources : {key : R , changeValue : number}[]
@@ -38,7 +36,7 @@ export const card001 : card =
     [
         {
             key : "MegaCredits",
-            value : 8
+            reqValue : 8
         }
     ],
     changePlayerResources :
@@ -52,7 +50,7 @@ export const card001 : card =
     {
         key : "globalOxygen",
         higherOrEqual : false,
-        value : 5,
+        reqValue : 5,
     },
     changePlayerPoints : 
     {
@@ -68,7 +66,7 @@ export const card002 : card =
     [
         {
             key : "MegaCredits",
-            value : 13
+            reqValue : 13
         }
     ],
     changePlayerResources :
@@ -99,7 +97,7 @@ export const card003 : card =
     [
         {
             key : "MegaCredits",
-            value : 13
+            reqValue : 13
         }
     ],
     changePlayerResources :
@@ -112,7 +110,7 @@ export const card003 : card =
     changeGlobalParameter : 
     {
         key : "globalTemperature",
-        addValue : 1
+        changeValue : 1
     },
     changePlayerProduction : 
     [
@@ -130,9 +128,15 @@ export const card004 : card =
     [
         {
             key : "MegaCredits",
-            value : 11
+            reqValue : 11
         }
     ],
+    requiredGlobalParameter : 
+    {
+        key : "globalOxygen",
+        higherOrEqual : true,
+        reqValue : 3,
+    },
     changePlayerResources :
     [
         {
@@ -140,12 +144,6 @@ export const card004 : card =
             changeValue : -11
         }
     ],
-    requiredGlobalParameter : 
-    {
-        key : "globalOxygen",
-        higherOrEqual : true,
-        value : 3,
-    },
     changePlayerProduction : 
     [
         {
@@ -158,6 +156,7 @@ export const card004 : card =
         }
     ]   
 }
+
 export const card009 : card = 
 {
     code : "card009",
@@ -166,7 +165,7 @@ export const card009 : card =
     [
         {
             key : "MegaCredits",
-            value : 14
+            reqValue : 14
         }
     ],
     changePlayerResources :
@@ -183,8 +182,53 @@ export const card009 : card =
     changeGlobalParameter : 
     {
         key : "globalTemperature",
-        addValue : 1
+        changeValue : 1
     }   
+}
+
+export const card011 : card = 
+{
+    code : "card011",
+    name : "Big Asteroid",
+    requiredResources : 
+    [
+        {
+            key : "MegaCredits",
+            reqValue : 27
+        }
+    ],
+    changePlayerResources :
+    [
+        {
+            key : "Titanium",
+            changeValue : 4
+        }
+    ],
+    changeGlobalParameter : 
+    {
+        key : "globalTemperature",
+        changeValue : 5,
+    }  
+}
+
+export const card013 : card = 
+{
+    code : "card013",
+    name : "Space Elevator",
+    requiredResources : 
+    [
+        {
+            key : "MegaCredits",
+            reqValue : 27
+        }
+    ],
+    changePlayerResources :
+    [
+        {
+            key : "Titanium",
+            changeValue : 1
+        }
+    ]
 }
 
 export const cardList = [card001, card002, card003, card004, card009];

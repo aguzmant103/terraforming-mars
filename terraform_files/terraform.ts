@@ -2,7 +2,7 @@
 // PENDING: Imports everything from the other submodules
 import {Player} from "./player";
 import {GlobalOcean, GlobalOxygen, GlobalParameters} from "./globalParameters";
-
+import {LogStack} from "./logs";
 /**
  * This Game class acts as the entry point to the players and board of a given game:
  * all components and features can be accessed from its properties and methods
@@ -26,6 +26,8 @@ export class Game {
      * Initiallizing a player list when a game is created.
      */
     readonly players: Player[] = [];
+    /* Initiallizing a LogStack when a game is created. */
+    readonly logs : LogStack = new LogStack(1000);
 
     constructor(){
         // Automatically generate UID for this instance. Increase global counter

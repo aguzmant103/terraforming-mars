@@ -1,7 +1,7 @@
 "use strict";
 /**
  * This 'index.ts' file is used to turn the surrounding
- * 'marketplace' folder into a module, imported by 'test.ts' outside.
+ * 'terraform_files' folder into a module, imported by 'test.ts' outside.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.cardList = exports.Player = exports.Game = void 0;

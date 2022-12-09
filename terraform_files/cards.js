@@ -2,14 +2,14 @@
 /*  There are 371 cards according to https://ssimeonoff.github.io/cards-list.
     From this list, only 2 cards are implemented to exemplify the game mechanics. */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.cardList = exports.card009 = exports.card004 = exports.card003 = exports.card002 = exports.card001 = void 0;
+exports.cardList = exports.card013 = exports.card011 = exports.card009 = exports.card004 = exports.card003 = exports.card002 = exports.card001 = void 0;
 exports.card001 = {
     code: "card001",
     name: "Colonizer Training Camp",
     requiredResources: [
         {
             key: "MegaCredits",
-            value: 8
+            reqValue: 8
         }
     ],
     changePlayerResources: [
@@ -21,7 +21,7 @@ exports.card001 = {
     requiredGlobalParameter: {
         key: "globalOxygen",
         higherOrEqual: false,
-        value: 5,
+        reqValue: 5,
     },
     changePlayerPoints: {
         key: "terraformPoints",
@@ -34,7 +34,7 @@ exports.card002 = {
     requiredResources: [
         {
             key: "MegaCredits",
-            value: 13
+            reqValue: 13
         }
     ],
     changePlayerResources: [
@@ -60,7 +60,7 @@ exports.card003 = {
     requiredResources: [
         {
             key: "MegaCredits",
-            value: 13
+            reqValue: 13
         }
     ],
     changePlayerResources: [
@@ -71,7 +71,7 @@ exports.card003 = {
     ],
     changeGlobalParameter: {
         key: "globalTemperature",
-        addValue: 1
+        changeValue: 1
     },
     changePlayerProduction: [
         {
@@ -86,20 +86,20 @@ exports.card004 = {
     requiredResources: [
         {
             key: "MegaCredits",
-            value: 11
+            reqValue: 11
         }
     ],
+    requiredGlobalParameter: {
+        key: "globalOxygen",
+        higherOrEqual: true,
+        reqValue: 3,
+    },
     changePlayerResources: [
         {
             key: "MegaCredits",
             changeValue: -11
         }
     ],
-    requiredGlobalParameter: {
-        key: "globalOxygen",
-        higherOrEqual: true,
-        value: 3,
-    },
     changePlayerProduction: [
         {
             key: "MegaCredits",
@@ -117,7 +117,7 @@ exports.card009 = {
     requiredResources: [
         {
             key: "MegaCredits",
-            value: 14
+            reqValue: 14
         }
     ],
     changePlayerResources: [
@@ -132,7 +132,43 @@ exports.card009 = {
     ],
     changeGlobalParameter: {
         key: "globalTemperature",
-        addValue: 1
+        changeValue: 1
     }
+};
+exports.card011 = {
+    code: "card011",
+    name: "Big Asteroid",
+    requiredResources: [
+        {
+            key: "MegaCredits",
+            reqValue: 27
+        }
+    ],
+    changePlayerResources: [
+        {
+            key: "Titanium",
+            changeValue: 4
+        }
+    ],
+    changeGlobalParameter: {
+        key: "globalTemperature",
+        changeValue: 5,
+    }
+};
+exports.card013 = {
+    code: "card013",
+    name: "Space Elevator",
+    requiredResources: [
+        {
+            key: "MegaCredits",
+            reqValue: 27
+        }
+    ],
+    changePlayerResources: [
+        {
+            key: "Titanium",
+            changeValue: 1
+        }
+    ]
 };
 exports.cardList = [exports.card001, exports.card002, exports.card003, exports.card004, exports.card009];

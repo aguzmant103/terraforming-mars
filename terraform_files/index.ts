@@ -1,6 +1,6 @@
 /**
  * This 'index.ts' file is used to turn the surrounding
- * 'marketplace' folder into a module, imported by 'test.ts' outside.
+ * 'terraform_files' folder into a module, imported by 'test.ts' outside.
  */
 
 // Select re-exports form sub-modules:

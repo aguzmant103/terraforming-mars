@@ -4,6 +4,7 @@ exports.Game = void 0;
 // Check there are no refernces for Marketplace, User, Buyer, Seller, etc.
 // PENDING: Imports everything from the other submodules
 const player_1 = require("./player");
+const logs_1 = require("./logs");
 /**
  * This Game class acts as the entry point to the players and board of a given game:
  * all components and features can be accessed from its properties and methods
@@ -19,6 +20,8 @@ class Game {
          * Initiallizing a player list when a game is created.
          */
         this.players = [];
+        /* Initiallizing a LogStack when a game is created. */
+        this.logs = new logs_1.LogStack(1000);
         // Automatically generate UID for this instance. Increase global counter
         this.gameId = Game._nextID++;
     }
