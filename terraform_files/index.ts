@@ -5,7 +5,11 @@
 
 // Select re-exports form sub-modules:
 // See https://www.typescriptlang.org/docs/handbook/modules.html#re-exports
-export { Game } from "./terraform";
-export { Player } from "./player";
-export { cardList } from "./cards";
 
+export { card, cardList, cardListType} from "./cards";
+export { GlobalParameters } from "./globalParameters";
+export { LogStack } from "./logs";
+export { } from "./objects"; // Pending
+export { Player } from "./player";
+export { R, resources } from "./resources";
+export { Game } from "./terraform";

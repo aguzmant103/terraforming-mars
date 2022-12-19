@@ -7,11 +7,13 @@
 - Victory Points dependant on other factors */
 
 import { R } from "./resources";
+import { GP } from "./globalParameters"
+export { card, cardList, cardListType};
 
-type GP = "globalOxygen" | "globalOcean" | "globalTemperature";
-type PP = "terraformPoints" | "victoryPoints";
 
-export type card = 
+type PP = "terraformPoints" | "victoryPoints"; 
+
+type card = 
 {
     code : string,
     name : string,
@@ -22,7 +24,7 @@ export type card =
     changePlayerPoints? : {key : PP , changeValue : number},
     changePlayerResources : {key : R , changeValue : number}[]
 }
-export const card001 : card = 
+const card001 : card = 
 {
     code : "card001",
     name : "Colonizer Training Camp",
@@ -52,7 +54,7 @@ export const card001 : card =
         changeValue : 2
     }     
 }
-export const card002 : card = 
+const card002 : card = 
 {
     code : "card002",
     name : "Asteroid Mining Consortium",
@@ -83,7 +85,7 @@ export const card002 : card =
         changeValue : 1
     }   
 }
-export const card003 : card = 
+const card003 : card = 
 {
     code : "card003",
     name : "Deep Well Heating",
@@ -114,7 +116,7 @@ export const card003 : card =
         }
     ]   
 }
-export const card004 : card = 
+const card004 : card = 
 {
     code : "card004",
     name : "Cloud Seeding",
@@ -150,7 +152,7 @@ export const card004 : card =
         }
     ]   
 }
-export const card009 : card = 
+const card009 : card = 
 {
     code : "card009",
     name : "Asteroid",
@@ -178,7 +180,7 @@ export const card009 : card =
         changeValue : 1
     }   
 }
-export const card011 : card = 
+const card011 : card = 
 {
     code : "card011",
     name : "Big Asteroid",
@@ -202,7 +204,7 @@ export const card011 : card =
         changeValue : 5,
     }  
 }
-export const card013 : card = 
+const card013 : card = 
 {
     code : "card013",
     name : "Space Elevator",
@@ -221,4 +223,9 @@ export const card013 : card =
         }
     ]
 }
-export const cardList = [card001, card002, card003, card004, card009, card011, card013];
+const cardList = 
+{
+    card001, card002, card003, card004, card009, card011, card013
+};
+
+type cardListType = "card001" | "card002" | "card003" | "card004" | "card009" | "card011" | "card013";

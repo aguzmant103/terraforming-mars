@@ -1,5 +1,5 @@
 import { resources, R } from "./resources";
-import { card, cardList} from "./cards";
+import { card, cardList, cardListType} from "./cards";
 import { Game } from "./terraform";
 
 export class Player {
@@ -9,7 +9,7 @@ export class Player {
         terraformPoints : 0,
         victoryPoints : 0
     }
-    private playerProduction = 
+    private playerProduction : resources= 
     {
         MegaCredits : 1,
         Steel : 1,
@@ -29,19 +29,10 @@ export class Player {
     }   
     constructor (readonly name : string, private game : Game){
         this.name = name;    
-        this.game = game;           
+        this.game = game; 
+        this.game.addLog(`${name} added to game`);          
     }
     // ==== METHODS ====
-    /**
-        List all player cards.
-    */
-    public listAll ()
-        {
-            this.listCards();
-            this.listPoints();
-            this.listProduction();
-            this.listResources();
-        }
     /**
         List all player cards.
     */
@@ -69,6 +60,15 @@ export class Player {
     public listResources ()
     {
         return this.playerResources;
+    }
+    /** 
+        Method to initialize a player with 3 random start cards.
+    */
+    public withStartCards(): this 
+    {
+        this.playerCards = [];
+        this.playerCards.push(randomCard(), randomCard(), randomCard());
+        return this;
     }
     /**
         Play a card player´s card.
@@ -104,14 +104,14 @@ export class Player {
 
         // 3. Perform the transitions
         // 3.1 Add Higher Log
-        this.game.logs.log(`${this.name} played ${cardCode}.`);
+        this.game.addLog(`${this.name} played ${cardCode}.`);
 
         // 3.2 Change Global Parameters
         if (playableCard.changeGlobalParameter != undefined)
         {
             const { key, changeValue } = playableCard?.changeGlobalParameter;
             this.game.globalParameters[key] += changeValue;
-            this.game.logs.log(`${this.name} changed ${key} by ${changeValue}. New ${key} is ${this.game.globalParameters[key]}.`);
+            this.game.addLog(`${this.name} changed ${key} by ${changeValue}. New ${key} is ${this.game.globalParameters[key]}.`);
         }
 
         // 3.3 Change Player Resources
@@ -121,7 +121,7 @@ export class Player {
             {
                 const { key, changeValue } = resource;
                 this.playerResources[key] += changeValue;
-                this.game.logs.log(`${this.name}'s ${key} changed by ${changeValue}. ${this.name} now has ${this.playerResources[key]} ${key}.`);
+                this.game.addLog(`${this.name}'s ${key} changed by ${changeValue}. ${this.name} now has ${this.playerResources[key]} ${key}.`);
             }
         }
 
@@ -132,7 +132,7 @@ export class Player {
             {
                 const { key, changeValue } = production;
                 this.playerProduction[key] += changeValue;
-                this.game.logs.log(`${this.name}'s ${key} production changed by ${changeValue}. New production value is ${this.playerProduction[key]}.`)
+                this.game.addLog(`${this.name}'s ${key} production changed by ${changeValue}. New production value is ${this.playerProduction[key]}.`)
             }
         }
 
@@ -141,7 +141,7 @@ export class Player {
         {
             const { key, changeValue } = playableCard.changePlayerPoints;
             this.playerPoints[key] += changeValue;
-            this.game.logs.log(`${this.name}'s ${key} changed by ${changeValue}. New value is ${this.playerPoints[key]}.`)
+            this.game.addLog(`${this.name}'s ${key} changed by ${changeValue}. New value is ${this.playerPoints[key]}.`)
         }
         // 3.6 Remove card from list
         const index = this.playerCards.indexOf(playableCard);
@@ -162,7 +162,7 @@ export class Player {
         // 3. Perform the transitions
         this.addCard(newCard);
         this.playerResources.MegaCredits -= 3;
-        this.game.logs.log(`${this.name} bought ${newCard.code}. ${this.name} now has ${this.playerResources.MegaCredits} MegaCredits. `);
+        this.game.addLog(`${this.name} bought ${newCard.code}. ${this.name} now has ${this.playerResources.MegaCredits} MegaCredits. `);
 
         return this;
     }
@@ -170,30 +170,25 @@ export class Player {
     private addResource(resource : R, value : number): this 
     {
         this.playerResources[resource] += value;
-        this.game.logs.log(`${value + " " + resource} to ${this.name}`);
-        return this;
-    }
-    // Pending: keeping this or not?
-    addTerraformPoints(value : number): this 
-    {
-        this.playerPoints.terraformPoints += value;
-        this.game.logs.log(`${value + " terraforming points"} to ${this.name}`);
-        return this;
-    }
-    // Pending: keeping this or not?
-    addVictoryPoints(value : number): this 
-    {
-        this.playerPoints.victoryPoints += value;
-        this.game.logs.log(`${value + " victory points"} to ${this.name}`);
+        this.game.addLog(`${value + " " + resource} to ${this.name}`);
         return this;
     }
     /** 
-        Method to initialize a player with 3 random start cards.
-    */
-    public withStartCards(): this 
+     * Adds terraforming points to this player. 
+     */
+    addTerraformPoints(value : number): this 
     {
-        this.playerCards = [];
-        this.playerCards.push(randomCard(), randomCard(), randomCard());
+        this.playerPoints.terraformPoints += value;
+        this.game.addLog(`${value + " terraforming points"} to ${this.name}`);
+        return this;
+    }
+    /** 
+     * Adds victory points to this player. 
+     * */
+    addVictoryPoints(value : number): this 
+    {
+        this.playerPoints.victoryPoints += value;
+        this.game.addLog(`${value + " victory points"} to ${this.name}`);
         return this;
     }
     /**
@@ -204,35 +199,56 @@ export class Player {
         this.playerCards.push(newCard);
         return this;
     }
+    /**
+     * E
+    */
+    private productionPhaseAction()
+    {
+        if (this.game.gamePhase === productionPhase) // Pending 
+        {
+            for (let element in this.playerProduction)
+            {
+                this.addResource(element as R,this.playerProduction[element as R] )
+                console.log(element);
+            }
+            // Pending this.game.nextPhase
+        }
+        else
+        {
+            throw new Error ("The current phase is not production.")
+        }
+        
+    }
 }
 /** 
     Helper function to find a card in a player or return undefined. This does not need to be exported. 
  */
-function returnCardInPlayer (codeToSearch : string, playerToSearch : Player ) : card | undefined {
+function returnCardInPlayer (codeToSearch : string, playerToSearch : Player ) : card | undefined 
+{
     const returningCard = playerToSearch.listCards().find(element => element.code === codeToSearch);
     return returningCard;
 }
-
 /**
  * Helper function that returns a random card from the available cards in the game.
  */
-function randomCard(){
-    return cardList[Math.floor(Math.random() * cardList.length)] as card; //Explicitely ignoring the undefined case as the cardList array will always be initialized with cards (this IS the available cards list)
+function randomCard()
+{
+    const keys = Object.keys(cardList);
+    const code_string = keys[Math.floor(Math.random() * keys.length)] as cardListType;
+    return cardList[code_string];
 }
-
 // Pending: do we keep this or not?
 function hasRequiredResources(playableCard : card, checkPlayer : Player) : boolean {
     for (const resource of playableCard.requiredResources){
         if (resource.reqValue >  checkPlayer.playerResources[resource.key])
         {
             throw new Error (`Not enough ${resource.key} available to play "${playableCard.name}".`);
-            return false; 
         }
     }
     return true;
 }
 
-/* class Player
+/* Pending: class Player
 Properties:
     type Player Information (de
         Properties

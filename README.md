@@ -21,9 +21,9 @@ Alternatively:
 4. PENDING OF IMPLEMENTATION
 
 ## Available commands
-| Column 1 | Column 2 | Column 3 |
+| Object | Command   |Parameters |
 |----------|----------|----------|
-| Cell 1   | Cell 2   | Cell 3   |
+| Game   | List    | Cell 3   |
 | Cell 4   | Cell 5   | Cell 6   |
 
 ## Out of Scope
@@ -37,7 +37,7 @@ The following features have being deliveratively left out from implementation fr
 - Editing other's players production values
 
 ## Example Implementation and Concepts
-To exemplify the usage of different OOP concepts, the following list was compiled:
+To exemplify the usage of different OOP concepts, the following list was compiled with examples:
 
 ##### Basic elements:
 - [X] Static Types "./resources" Line 5
@@ -50,8 +50,10 @@ To exemplify the usage of different OOP concepts, the following list was compile
 ##### More elements:
 - [X] Classes
 - [X] Class inheritance "./objects" Lines 79, 98, 122
-- [] Interfaces - Class implementations
-- [] Usage of private and not exportable methods
+- [] Interfaces aka Class implementations
+- [X] Usage of static property "./terraform" Line 15
+- [X] Usage of private and not exportable methods "./logs" Line 66
+
 
 ##### Usage of data structures:
 - [X] Stack "./logs" Line 5
@@ -59,7 +61,7 @@ To exemplify the usage of different OOP concepts, the following list was compile
 
 ##### Usage of advanced elements:
 - [] Polymorphism in sub-typing (including inheritance and interface extension)
-- [] Polymorl (multiple call signatures)
+- [] Polymorphism (multiple call signatures)
 - [X] Generics - Polymorphism in parametric polymorphism "./logs" Line 5
 
 ##### Usage of Design Patterns:
@@ -84,16 +86,16 @@ To exemplify the usage of different OOP concepts, the following list was compile
 ##### Style:
 - [X] Usage of TSList
 
-##### Readme
+##### ReadMe
 - [X] Here explains the background, list of elements looked, and how to run it.
 
 ##### Specifications:
 - [X] Multiple independent instances of Game "./test" Line 17
-- [X] Game show data - "Methods like Game.showGlobalParameters, showAllLogs, printBoard, etc"
-- [] Prevent illegal actions!
 - [X] Use of Readonly "./objects" Line 80, 81, 82... and many other places
-- [] Don't use classes for small things
-- [] Usage of static types
+- [X] Game show data - "Methods like Game.showGlobalParameters, showAllLogs, printBoard, etc"
+- [X] Prevent illegal actions! - "Tested as much as possible"
+- [X] Don't use classes for small things
+
 - [] Basic structure types to be more specific with input parameters.
 - [] Global Parameters are not publicly accesible
 - [] Game has sole responsibility for action execution and/or information exposure instead of sub-components. 
@@ -103,7 +105,3 @@ To exemplify the usage of different OOP concepts, the following list was compile
   - Methods can be successfully invoked with illegal parameters, or in illegal order. 
 	- Mutable public properties allow illegal values to be set.
   - Read-only properties expose objects which can themselves be illegally modified. 
-
-Pending: Remove this area
-  ##### Known Issues:
-  - Game logs and globalparameters should be private. But they break player playcard functionality.

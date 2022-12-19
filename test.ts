@@ -7,7 +7,7 @@
 */
 
 import { Game } from "./terraform_files";
-import *  as cards from "./terraform_files/cards";
+import { cardList as cards} from "./terraform_files";
 
 console.log("  \n    WELCOME TO THE TESTING GROUNDS OF TERRAFORMING MARS!    \n ");
 console.log("1. INITIALIZING TWO GAMES");
@@ -15,38 +15,25 @@ let game1 = new Game (10); // Initializing a game with a 10x10 board.
 let game2 = new Game (25); // Initializing a game with a 25x25 board.
 //console.log(game2); // <- Check the different Game IDs
 
-console.log("1.1 PRINTING THE EMPTY BOARD");
-// game1.board.printBoard();
+console.log("1.1 PRINTING AN EMPTY BOARD");
+//game2.printBoard();
 
 console.log("1.2. ADDING NEW PLAYERS TO EACH GAME");
 game1.newPlayer("Susan");
 game2.newPlayer("Steve");
-game2.getPlayer("Steve")?.listAll();
-console.log(game2.getPlayer("Steve")); // <- Check the information of the player
+// Pending: temporary tests
+game2.getPlayer("Steve")?.productionPhaseAction();
+//console.log(game2.getPlayer("Steve")); // <- Check the information of the player
 
 console.log("1.3. ADDING ANOTHER PLAYER WITH START CARDS");
 game2.newPlayer("Mark").withStartCards(); // <- withStardCards initializes a player's deck with 3 random cards.. 
-// console.log(game2.getPlayer("Mark")?.listCards()); // <- Check the cards available on this player
+//console.log(game2.getPlayer("Mark")?.listCards()); // <- Check the cards available on this player
 
-console.log("1.3. ADDING CARDS TO A PLAYER");
+console.log("1.4. ADDING CARDS TO A PLAYER");
 game2.getPlayer("Mark")?.buyCard(cards.card004).buyCard(cards.card009); 
 //console.log(game2.getPlayer("Mark")?.listCards());
 
-console.log("1.4 LISTING CARDS OF A NON-EXISTING PLAYER");
-//console.log(game2.getPlayer("IronMan")?.listCards());
-//console.log("2. PLAY A CARD THAT DOES NOT EXIST");
-
-console.log("2. PLAY A CARD THE PLAYER DOES NOT HAVE");
-/* try
-{
-    game2.player("Mark")?.playCard("card001");
-} 
-catch (error) 
-{
-    console.error(error);
-} */
-
-console.log("2. PLAYING A CARD");
+console.log(" \n 2. PLAYING A CARD");
 console.log("2.1b SHOWING PARAMETERS BEFORE THE CARD");
 /* console.log(game2.globalParameters);
 console.log(game2.getPlayer("Mark")?.listResources());
@@ -63,16 +50,31 @@ console.log(game2.getPlayer("Mark")?.listResources());
 console.log(game2.getPlayer("Mark")?.listProduction());
 console.log(game2.getPlayer("Mark")?.listCards()); */
 
-console.log("3. SHOWING GAME LOGS");
+console.log(" \n 3. SHOWING GAME LOGS");
 game1.showAllLogs();
-//console.log(game1.showAllLogs()); // <- Prints the available logs
+//console.log(game2.showAllLogs()); // <- Prints the available logs
+
+
+
+/* Pending for Monday
+1. Contineu with gameEngine and Objects
+2. Continue with Pending stuff
+3. Continue with missing elements from the list
+4. Update the references */
+
+
 
 /* 
     NEXT
-1. Need to refactor the test and functions to work more as a facade
 2. Add the list of facade commands to the readme
 3. Check how the errors are being managed.
 4. Decide to go to:
 - Continue with the Game implementation
 - Try to pursue refactoring to get the description of the assignment
 */
+
+/* PENDING:
+1. Game Engine
+2. All the Phases in linked List
+3. Start game action 
+4. Game board*/

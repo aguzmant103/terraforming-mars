@@ -1,8 +1,8 @@
 "use strict";
 /*  There are 371 cards according to https://ssimeonoff.github.io/cards-list.  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.cardList = exports.card013 = exports.card011 = exports.card009 = exports.card004 = exports.card003 = exports.card002 = exports.card001 = void 0;
-exports.card001 = {
+exports.cardList = void 0;
+const card001 = {
     code: "card001",
     name: "Colonizer Training Camp",
     requiredResources: [
@@ -27,7 +27,7 @@ exports.card001 = {
         changeValue: 2
     }
 };
-exports.card002 = {
+const card002 = {
     code: "card002",
     name: "Asteroid Mining Consortium",
     requiredResources: [
@@ -53,7 +53,7 @@ exports.card002 = {
         changeValue: 1
     }
 };
-exports.card003 = {
+const card003 = {
     code: "card003",
     name: "Deep Well Heating",
     requiredResources: [
@@ -79,7 +79,7 @@ exports.card003 = {
         }
     ]
 };
-exports.card004 = {
+const card004 = {
     code: "card004",
     name: "Cloud Seeding",
     requiredResources: [
@@ -110,7 +110,7 @@ exports.card004 = {
         }
     ]
 };
-exports.card009 = {
+const card009 = {
     code: "card009",
     name: "Asteroid",
     requiredResources: [
@@ -134,7 +134,7 @@ exports.card009 = {
         changeValue: 1
     }
 };
-exports.card011 = {
+const card011 = {
     code: "card011",
     name: "Big Asteroid",
     requiredResources: [
@@ -154,7 +154,7 @@ exports.card011 = {
         changeValue: 5,
     }
 };
-exports.card013 = {
+const card013 = {
     code: "card013",
     name: "Space Elevator",
     requiredResources: [
@@ -170,4 +170,7 @@ exports.card013 = {
         }
     ]
 };
-exports.cardList = [exports.card001, exports.card002, exports.card003, exports.card004, exports.card009, exports.card011, exports.card013];
+const cardList = {
+    card001, card002, card003, card004, card009, card011, card013
+};
+exports.cardList = cardList;

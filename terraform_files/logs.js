@@ -72,13 +72,12 @@ class LogStack {
     peak() {
         return this.peak;
     }
-    // Pending: how to make this method private or protected
     // A public method to add a log to the stack.
-    log(message) {
+    addLog(message) {
         this.logs.push(new Log(message));
     }
     // A method for retrieving all of the logs in the stack.
-    getAll() {
+    getLogs() {
         return this.logs.toArray();
     }
 }

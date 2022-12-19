@@ -14,7 +14,7 @@ class Game {
         /**
          * Global parameters of game that represent Oxygen, Ocean and Temperature levels.
          */
-        this.globalParameters = { globalOxygen: 0, globalOcean: 0, globalTemperature: -30 };
+        this.globalParameters = { globalOxygen: 0, globalOcean: 0, globalTemperature: -30 }; //PENDING: how to restrict this against user manipulation.
         /**
          * Initiallizing a player list when a game is created.
          */
@@ -25,6 +25,7 @@ class Game {
         this.gameId = Game._nextID++;
         // Instantiates a new board tied to this game.
         this.board = new objects_1.GameBoard(this, dimensions);
+        this.addLog(`Game initialized`);
     }
     // ==== METHODS ====
     /**
@@ -39,7 +40,7 @@ class Game {
     *                  because it has to handle additional internal logic.
     */
     /**
-    * Creates a new player and adds it to this game.
+    * Creates a new player and adds it to this game. No duplicated names are possible.
     */
     newPlayer(playerName) {
         if (this.getPlayer(playerName) === undefined) {
@@ -48,13 +49,12 @@ class Game {
             return player;
         }
         else {
-            this.logs.log("Can't have duplicated player names.");
+            this.addLog("Can't have duplicated player names.");
             return this.getPlayer(playerName); // This will always return a Player (and not undefined) due to the check above.
         }
     }
     /**
      * Returns the first player with the queried name, or undefined if one does not exist.
-     * Pending: No duplication of player names is possible
      */
     getPlayer(name) {
         return this.players.find(element => element.name === name);
@@ -66,16 +66,41 @@ class Game {
         return this.globalParameters;
     }
     /**
+     * PENDING: Do I keep this? Change a global parameters of a game.
+     * */
+    changeGlobalParameters(key, changeValue) {
+        this.globalParameters[key] += changeValue;
+        return this.globalParameters;
+    }
+    /**
     * Return all logs of a game.
     * */
     showAllLogs() {
-        return this.logs.getAll();
+        return this.logs.getLogs();
+    }
+    /**
+    * Return all logs of a game.
+    * */
+    showPlayers() {
+        return this.players;
     }
     /**
    * Return the last logs of a game.
    * */
     showLastLog() {
         return this.logs.peak();
+    }
+    /**
+     * Prints the current status of the board.
+    */
+    printBoard() {
+        this.board.printBoard();
+    }
+    /**
+     * Adds a log to the current game. PENDING: how to restrict this against user manipulation.
+    */
+    addLog(message) {
+        this.logs.addLog(message);
     }
 }
 exports.Game = Game;

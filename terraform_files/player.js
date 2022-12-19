@@ -29,17 +29,9 @@ class Player {
         };
         this.name = name;
         this.game = game;
+        this.game.addLog(`${name} added to game`);
     }
     // ==== METHODS ====
-    /**
-        List all player cards.
-    */
-    listAll() {
-        this.listCards();
-        this.listPoints();
-        this.listProduction();
-        this.listResources();
-    }
     /**
         List all player cards.
     */
@@ -63,6 +55,14 @@ class Player {
     */
     listResources() {
         return this.playerResources;
+    }
+    /**
+        Method to initialize a player with 3 random start cards.
+    */
+    withStartCards() {
+        this.playerCards = [];
+        this.playerCards.push(randomCard(), randomCard(), randomCard());
+        return this;
     }
     /**
         Play a card player´s card.
@@ -91,19 +91,19 @@ class Player {
         }
         // 3. Perform the transitions
         // 3.1 Add Higher Log
-        this.game.logs.log(`${this.name} played ${cardCode}.`);
+        this.game.addLog(`${this.name} played ${cardCode}.`);
         // 3.2 Change Global Parameters
         if (playableCard.changeGlobalParameter != undefined) {
             const { key, changeValue } = playableCard?.changeGlobalParameter;
             this.game.globalParameters[key] += changeValue;
-            this.game.logs.log(`${this.name} changed ${key} by ${changeValue}. New ${key} is ${this.game.globalParameters[key]}.`);
+            this.game.addLog(`${this.name} changed ${key} by ${changeValue}. New ${key} is ${this.game.globalParameters[key]}.`);
         }
         // 3.3 Change Player Resources
         if (playableCard.changePlayerResources != undefined) {
             for (const resource of playableCard.changePlayerResources) {
                 const { key, changeValue } = resource;
                 this.playerResources[key] += changeValue;
-                this.game.logs.log(`${this.name}'s ${key} changed by ${changeValue}. ${this.name} now has ${this.playerResources[key]} ${key}.`);
+                this.game.addLog(`${this.name}'s ${key} changed by ${changeValue}. ${this.name} now has ${this.playerResources[key]} ${key}.`);
             }
         }
         // 3.4 Change Player Production
@@ -111,14 +111,14 @@ class Player {
             for (const production of playableCard.changePlayerProduction) {
                 const { key, changeValue } = production;
                 this.playerProduction[key] += changeValue;
-                this.game.logs.log(`${this.name}'s ${key} production changed by ${changeValue}. New production value is ${this.playerProduction[key]}.`);
+                this.game.addLog(`${this.name}'s ${key} production changed by ${changeValue}. New production value is ${this.playerProduction[key]}.`);
             }
         }
         // 3.5 Change Player Points (Victory and Terraforming)
         if (playableCard.changePlayerPoints != undefined) {
             const { key, changeValue } = playableCard.changePlayerPoints;
             this.playerPoints[key] += changeValue;
-            this.game.logs.log(`${this.name}'s ${key} changed by ${changeValue}. New value is ${this.playerPoints[key]}.`);
+            this.game.addLog(`${this.name}'s ${key} changed by ${changeValue}. New value is ${this.playerPoints[key]}.`);
         }
         // 3.6 Remove card from list
         const index = this.playerCards.indexOf(playableCard);
@@ -135,33 +135,29 @@ class Player {
         // 3. Perform the transitions
         this.addCard(newCard);
         this.playerResources.MegaCredits -= 3;
-        this.game.logs.log(`${this.name} bought ${newCard.code}. ${this.name} now has ${this.playerResources.MegaCredits} MegaCredits. `);
+        this.game.addLog(`${this.name} bought ${newCard.code}. ${this.name} now has ${this.playerResources.MegaCredits} MegaCredits. `);
         return this;
     }
     // Pending: keeping this or not?
     addResource(resource, value) {
         this.playerResources[resource] += value;
-        this.game.logs.log(`${value + " " + resource} to ${this.name}`);
-        return this;
-    }
-    // Pending: keeping this or not?
-    addTerraformPoints(value) {
-        this.playerPoints.terraformPoints += value;
-        this.game.logs.log(`${value + " terraforming points"} to ${this.name}`);
-        return this;
-    }
-    // Pending: keeping this or not?
-    addVictoryPoints(value) {
-        this.playerPoints.victoryPoints += value;
-        this.game.logs.log(`${value + " victory points"} to ${this.name}`);
+        this.game.addLog(`${value + " " + resource} to ${this.name}`);
         return this;
     }
     /**
-        Method to initialize a player with 3 random start cards.
-    */
-    withStartCards() {
-        this.playerCards = [];
-        this.playerCards.push(randomCard(), randomCard(), randomCard());
+     * Adds terraforming points to this player.
+     */
+    addTerraformPoints(value) {
+        this.playerPoints.terraformPoints += value;
+        this.game.addLog(`${value + " terraforming points"} to ${this.name}`);
+        return this;
+    }
+    /**
+     * Adds victory points to this player.
+     * */
+    addVictoryPoints(value) {
+        this.playerPoints.victoryPoints += value;
+        this.game.addLog(`${value + " victory points"} to ${this.name}`);
         return this;
     }
     /**
@@ -170,6 +166,12 @@ class Player {
     addCard(newCard) {
         this.playerCards.push(newCard);
         return this;
+    }
+    productionPhaseAction() {
+        for (let element in this.playerProduction) {
+            this.addResource(element, this.playerProduction[element]);
+            console.log(element);
+        }
     }
 }
 exports.Player = Player;
@@ -184,19 +186,20 @@ function returnCardInPlayer(codeToSearch, playerToSearch) {
  * Helper function that returns a random card from the available cards in the game.
  */
 function randomCard() {
-    return cards_1.cardList[Math.floor(Math.random() * cards_1.cardList.length)]; //Explicitely ignoring the undefined case as the cardList array will always be initialized with cards (this IS the available cards list)
+    const keys = Object.keys(cards_1.cardList);
+    const code_string = keys[Math.floor(Math.random() * keys.length)];
+    return cards_1.cardList[code_string];
 }
 // Pending: do we keep this or not?
 function hasRequiredResources(playableCard, checkPlayer) {
     for (const resource of playableCard.requiredResources) {
         if (resource.reqValue > checkPlayer.playerResources[resource.key]) {
             throw new Error(`Not enough ${resource.key} available to play "${playableCard.name}".`);
-            return false;
         }
     }
     return true;
 }
-/* class Player
+/* Pending: class Player
 Properties:
     type Player Information (de
         Properties
