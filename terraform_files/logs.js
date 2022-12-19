@@ -68,6 +68,11 @@ class LogStack {
     pop() {
         return this.logs.pop();
     }
+    // A method that returns the top log without removing it.
+    peak() {
+        return this.peak;
+    }
+    // Pending: how to make this method private or protected
     // A public method to add a log to the stack.
     log(message) {
         this.logs.push(new Log(message));

@@ -1,6 +1,5 @@
 
-/*  There are 371 cards according to https://ssimeonoff.github.io/cards-list. 
-    From this list, only 2 cards are implemented to exemplify the game mechanics. */
+/*  There are 371 cards according to https://ssimeonoff.github.io/cards-list.  */
 
 /* Out of scope:
 - Modifying resources of other players
@@ -9,8 +8,6 @@
 
 import { R } from "./resources";
 
-// Pending: is this needed? Check export imports too
-type availableCards = "card001" | "card002" | "card003" | "card004" | "card005" | "card009" | "card011" | "card013";
 type GP = "globalOxygen" | "globalOcean" | "globalTemperature";
 type PP = "terraformPoints" | "victoryPoints";
 
@@ -224,5 +221,4 @@ export const card013 : card =
         }
     ]
 }
-
-export const cardList = [card001, card002, card003, card004, card009];
+export const cardList = [card001, card002, card003, card004, card009, card011, card013];

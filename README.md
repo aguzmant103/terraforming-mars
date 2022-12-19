@@ -48,12 +48,9 @@ To exemplify the usage of different OOP concepts, the following list was compile
 - [] For...in Loops
 
 ##### More elements:
-- [] Classes:
-    - Single Responsibility Principle
-    - Dependency
-- [] Class inheritance
-- [] Class implementations
-- [] Interfaces
+- [X] Classes
+- [X] Class inheritance "./objects" Lines 79, 98, 122
+- [] Interfaces - Class implementations
 - [] Usage of private and not exportable methods
 
 ##### Usage of data structures:
@@ -62,12 +59,12 @@ To exemplify the usage of different OOP concepts, the following list was compile
 
 ##### Usage of advanced elements:
 - [] Polymorphism in sub-typing (including inheritance and interface extension)
-- [] Polymorphism in function overloading (multiple call signatures)
+- [] Polymorl (multiple call signatures)
 - [X] Generics - Polymorphism in parametric polymorphism "./logs" Line 5
 
 ##### Usage of Design Patterns:
-- [X] Façade Pattern: data management
-- [] Factory Pattern
+- [X] Façade Pattern - "./terraform.ts" Line 7
+- [X] Factory Pattern - "./terraform.ts" Line 59
 - [] State Pattern
 - [] Builder Pattern
 - [] Fluint
@@ -78,34 +75,35 @@ To exemplify the usage of different OOP concepts, the following list was compile
 ##### Organization:
 - [X] Single folder: can be found under the folder "terraform_files"
 - [X] Index: can be found under "terraform_files/index.ts"
-- [] Export and local elements
-
-##### Extra Points:
-- [] Recursion
+- [X] Export modules and use local modules - "This is used accross all modules"
 
 ##### Documentation:
-- [] Add one line per method
-- [] Except terribly basic (1-2 lines of code)
+- [X] Add one line per method
+- [X] Except terribly basic (1-2 lines of code)
 
 ##### Style:
-- [] Usage of TSList
+- [X] Usage of TSList
 
 ##### Readme
 - [X] Here explains the background, list of elements looked, and how to run it.
 
 ##### Specifications:
 - [X] Multiple independent instances of Game "./test" Line 17
-- [] Game show data
+- [X] Game show data - "Methods like Game.showGlobalParameters, showAllLogs, printBoard, etc"
 - [] Prevent illegal actions!
-- [] Readonly
-- [] Basic Types, Obect Literal,
+- [X] Use of Readonly "./objects" Line 80, 81, 82... and many other places
 - [] Don't use classes for small things
 - [] Usage of static types
 - [] Basic structure types to be more specific with input parameters.
 - [] Global Parameters are not publicly accesible
-- [] Game has sole responsibility for action execution and/or information exposure instead of  sub-components. 
-- Safe execution:
+- [] Game has sole responsibility for action execution and/or information exposure instead of sub-components. 
+
+##### Safe execution:
   - The public methods and properties of the Game class and any sub-components which it exposes must not allow illegal actions to be performed.
   - Methods can be successfully invoked with illegal parameters, or in illegal order. 
 	- Mutable public properties allow illegal values to be set.
   - Read-only properties expose objects which can themselves be illegally modified. 
+
+Pending: Remove this area
+  ##### Known Issues:
+  - Game logs and globalparameters should be private. But they break player playcard functionality.

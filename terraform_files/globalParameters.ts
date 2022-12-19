@@ -6,11 +6,11 @@ type GlobalTemperature = -30 | -29 | -28 | -27 | -26 | -25 | -24 | -23 | -22 | -
                          -10 | -9 | -8 | -7 | -6 | -5 | -4 | -3 | -2 | -1 |
                            0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
-
 /**
  * Type GlobalParameters that restricts the valid values for Oxygen, Ocean and Temperature.
  */
-export type GlobalParameters = {
+export type GlobalParameters = 
+  {
     globalOxygen: GlobalOxygen;
     globalOcean: GlobalOcean;
     globalTemperature : GlobalTemperature;

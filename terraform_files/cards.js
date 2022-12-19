@@ -1,6 +1,5 @@
 "use strict";
-/*  There are 371 cards according to https://ssimeonoff.github.io/cards-list.
-    From this list, only 2 cards are implemented to exemplify the game mechanics. */
+/*  There are 371 cards according to https://ssimeonoff.github.io/cards-list.  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.cardList = exports.card013 = exports.card011 = exports.card009 = exports.card004 = exports.card003 = exports.card002 = exports.card001 = void 0;
 exports.card001 = {
@@ -171,4 +170,4 @@ exports.card013 = {
         }
     ]
 };
-exports.cardList = [exports.card001, exports.card002, exports.card003, exports.card004, exports.card009];
+exports.cardList = [exports.card001, exports.card002, exports.card003, exports.card004, exports.card009, exports.card011, exports.card013];

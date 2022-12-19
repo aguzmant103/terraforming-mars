@@ -1,16 +1,67 @@
-Class Inheritance in Corporations
+import { Player } from "./player";
+import { Game } from "./terraform";
 
 
+export class GameBoard
+{
+  private board : number[][]= [];
+  readonly dimensions : number;
+  readonly game : Game;
+  constructor(game : Game, dimensions : number){
+    this.game = game;
+    this.dimensions = dimensions;
 
+    for (let i = 0; i < this.dimensions; i++) {
+      // Create an empty row
+      let row: number[] = [];
 
+      // Iterate over the columns
+      for (let j = 0; j < this.dimensions; j++) {
+        // Push a 0 onto the row to represent an empty cell
+        row.push(0);
+      }
 
+      // Push the row onto the board
+      this.board.push(row);
+    }
+  }
 
+  printBoard () 
+  {
+    // Print the board to the console
+    for (let i = 0; i < this.dimensions; i++) 
+    {
+      let row = "";
 
+      for (let j = 0; j < this.dimensions; j++) 
+      {
+        row += this.board[i]![j] + " ";
+      }
 
+      console.log(row);
+    }
+  }
+}
+
+type OceanTile = 
+{
+  representation : "O",
+}
+type CityTile = 
+{
+  owner : Player,
+  representation : "C",
+}
+type GreeneryTile = 
+{
+  owner : Player,
+  representation : "G",
+}
 
 
 // The base GameObject class represents any object that exists in the game board
 class GameObject {
+
     // The x and y coordinates of the object on the map
     readonly x: number;
     readonly y: number;
@@ -22,52 +73,63 @@ class GameObject {
     }
   
   }
-  
-  // The Player class extends the GameObject class and represents a player in the game
-  class Player extends GameObject {
-    // The player's name
-    public name: string;
-  
-    // The player's score
-    public score: number;
-  
-    // A constructor for creating a new Player instance
-    constructor(name: string, x: number, y: number) {
-      super(x, y);
-      this.name = name;
-      this.score = 0;
-    }
-  
-    // A method for increasing the player's score
-    public increaseScore(points: number): void {
-      this.score += points;
-    }
-  
-    // A method for decreasing the player's score
-    public decreaseScore(points: number): void {
-      this.score = Math.max(0, this.score - points);
-    }
+/**   The OceanClass extends the GameObject class and represents a terraforming Ocean in the game */
+class OceanClass extends GameObject {
+  readonly titleType = "Ocean";
+  readonly representation = "O";
+  readonly owner : Player;
+
+  // A constructor for creating a new Ocean instance
+  constructor(x: number, y: number, owner : Player) {
+    super(x, y);
+    this.owner = owner;
+    this.addCredits;
   }
-  
-  // The Robot class extends the GameObject class and represents a terraforming robot in the game
-  class Robot extends GameObject {
-    // The robot's type
-    public type: RobotType;
-  
-    // The robot's remaining battery power
-    public power: number;
-  
-    // A constructor for creating a new Robot instance
-    constructor(type: RobotType, x: number, y: number) {
-      super(x, y);
-      this.type = type;
-      this.power = 100;
-    }
-  
-    // A method for moving the robot and consuming its battery power
-    public moveTo(x: number, y: number): void {
-      super.moveTo(x, y);
-      this.power = Math.max(0, this.power - 1);
-    }
+
+  private addCredits()
+  {
+    this.owner.playerResources.MegaCredits +=2;
   }
-  
+
+}
+/**   The GreeneryClass extends the GameObject class and represents a terraforming Greenery in the game */
+class GreeneryClass extends GameObject {
+  readonly titleType = "Greenery";
+  readonly representation = "G";
+  readonly owner : Player;
+  // A constructor for creating a new Greenery instance
+  constructor(x: number, y: number, owner : Player) {
+    super(x, y);
+    this.owner = owner;
+    this.addOxygen;
+    this.addPoints;
+  }
+  /** Elevate the Oxygen level by 2.  */
+  private addOxygen()
+  {
+    // PEnding: this.owner.game.globalParameters.globalOxygen +=2;
+  }
+  /** Increase the Victory Point by 1 and Terraforming Points by 1 to the owner of the title.  */
+  private addPoints()
+  {
+    this.owner.addTerraformPoints(1);
+    this.owner.addVictoryPoints(1);
+  }
+  }
+/**   The GreeneryClass extends the GameObject class and represents a terraforming City in the game */
+class CityClass extends GameObject {
+  readonly titleType = "City";
+  readonly representation = "C";
+  readonly owner : Player;
+  // A constructor for creating a new City instance
+  constructor(x: number, y: number, owner : Player) {
+    super(x, y);
+    this.owner = owner;
+    this.addPoints;
+  }
+  /** Increase the Victory Point by 2 to the owner of the title.  */
+  private addPoints()
+  {
+    this.owner.addTerraformPoints(2);
+  }
+  }

@@ -1,7 +1,8 @@
 /** 
     Implementation of a generic stack using an array with no fixed length that with generic types.
 */ 
-class Stack<T> {
+class Stack<T> 
+  {
     // An array for storing the items in the stack
     private array: T[] = [];
     
@@ -41,7 +42,8 @@ class Stack<T> {
   /** 
     Class of generic logs.
   */
-class Log {
+class Log 
+  {
     // The timestamp at which the log was generated
     public timestamp: Date;
   
@@ -58,7 +60,8 @@ class Log {
 /** 
   Implementation of a Stack of Logs.
 */
-export class LogStack {
+export class LogStack 
+{
     // A stack for storing the logs.
     private logs: Stack<Log>;
   
@@ -84,8 +87,15 @@ export class LogStack {
       return this.logs.pop();
     }
 
+    // A method that returns the top log without removing it.
+    peak()
+    {
+      return this.peak;
+    }
+    
+    // Pending: how to make this method private or protected
     // A public method to add a log to the stack.
-    public log(message : string) : void {
+    log(message : string) : void {
       this.logs.push(new Log (message));
     }
   
