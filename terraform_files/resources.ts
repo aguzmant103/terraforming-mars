@@ -1,6 +1,7 @@
 
 export type R = "MegaCredits" |"Steel" | "Titanium" | "Plants" | "Energy" | "Heat";
-export type resources = {
+export type resources = 
+{
     MegaCredits : number,
     Steel : number,
     Titanium : number,

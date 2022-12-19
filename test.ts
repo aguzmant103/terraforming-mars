@@ -13,19 +13,26 @@ console.log("  \n    WELCOME TO THE TESTING GROUNDS OF TERRAFORMING MARS!    \n 
 console.log("1. INITIALIZING TWO GAMES");
 let game1 = new Game (10); // Initializing a game with a 10x10 board.
 let game2 = new Game (25); // Initializing a game with a 25x25 board.
-//console.log(game2); // <- Check the different Game IDs
+//console.log(game2.showGameID()); // <- Check the different Game IDs
+//console.log(game2.showGameID()); // <- Check the different Game IDs
 
 console.log("1.1 PRINTING AN EMPTY BOARD");
-//game2.printBoard();
+//game2.printBoard(); // <- Print an empty board
 
-console.log("1.2. ADDING NEW PLAYERS TO EACH GAME");
+console.log("1.2 CHECKING CURRENT GAME PHASE AND GENERATION");
+console.log(game2.showPhase());
+console.log(game2.showGeneration());
+console.log(game2.showAllLogs());
+
+console.log("1.3a. ADDING NEW PLAYERS TO EACH GAME");
 game1.newPlayer("Susan");
 game2.newPlayer("Steve");
-// Pending: temporary tests
-game2.getPlayer("Steve")?.productionPhaseAction();
 //console.log(game2.getPlayer("Steve")); // <- Check the information of the player
 
-console.log("1.3. ADDING ANOTHER PLAYER WITH START CARDS");
+// Pending: temporary tests
+// game2.getPlayer("Steve")?.productionPhaseAction();
+
+console.log("1.3b. ADDING ANOTHER PLAYER WITH START CARDS");
 game2.newPlayer("Mark").withStartCards(); // <- withStardCards initializes a player's deck with 3 random cards.. 
 //console.log(game2.getPlayer("Mark")?.listCards()); // <- Check the cards available on this player
 

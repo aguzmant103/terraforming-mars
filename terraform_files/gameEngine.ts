@@ -8,70 +8,6 @@ Production phase, all players produce resources according to */
 import { Game } from "./terraform";
 import { R } from "./resources";
 
-// Pending type Phases;
-// Pending type Generation;
-
-function executeTurnOrderPhase(game: Game)
-{
-  if (this.game.gamePhase === "turnOrderPhase")
-  {
-    game.gamePhases.nextPhase();
-  }
-  else
-  {
-    throw new Error ("Not currently in Turn Order phase.")
-  }    
-}
-function executeResearchPhase(game: Game)
-{
-  if (game.gamePhases.current.value === "researchPhase")
-  {
-    game.gamePhases.nextPhase();
-  }
-  else
-  {
-    throw new Error ("Not currently in research phase.")
-  }    
-}
-function executeActionPhase(game: Game)
-{
-  if (game.gamePhases.current.value === "actionPhase")
-  {
-    for (let player of game.showPlayers())
-    {
-        for (let element in player.listProduction)
-        {
-            this.addResource(element as R,this.playerProduction[element as R] )
-            console.log(element);
-        }
-    }
-    game.gamePhases.nextPhase();
-  }
-  else
-  {
-      throw new Error ("Not currently in action phase.")
-  }    
-}
-function executeProductionPhase(game: Game)
-{
-  if (game.gamePhases.current.value === "productionPhase")
-  {
-    for (let player of game.showPlayers())
-    {
-        for (let element in player.listProduction)
-        {
-            this.addResource(element as R,this.playerProduction[element as R] )
-            console.log(element);
-        }
-    }
-    game.gamePhase== "turnOrderPhase"
-  }
-  else
-  {
-      throw new Error ("Currently not in production phase.")
-  }    
-}
-
 /**
  * Generic class template of a PhaseNode.
   */
@@ -109,4 +45,70 @@ export class GamePhases
   {
     this.current = this.current.next as PhaseNode;
   }
+}
+
+function executeTurnOrderPhase(game: Game)
+{
+  if (game.showPhase() === "turnOrderPhase")
+  {
+    game.addLog(`Ending phase ${game.showPhase}. Current generation ${game.showGeneration}`);
+    game.gamePhases.nextPhase();
+  }
+  else
+  {
+    throw new Error ("Not currently in Turn Order phase.")
+  }    
+}
+function executeResearchPhase(game: Game)
+{
+  if (game.showPhase() === "researchPhase")
+  {
+    game.addLog(`Ending phase ${game.showPhase}. Current generation ${game.showGeneration}`);
+    game.nextPhase();
+  }
+  else
+  {
+    throw new Error ("Not currently in research phase.")
+  }    
+}
+function executeActionPhase(game: Game)
+{
+  if (game.showPhase() === "actionPhase")
+  {
+    for (let player of game.showPlayers())
+    {
+        for (let element in player.listProduction)
+        {
+            player.addResource(element as R,player.playerProduction[element as R] )
+            console.log(element);
+        }
+    }
+    game.addLog(`Ending phase ${game.showPhase}. Current generation ${game.showGeneration}`);
+    game.nextPhase();
+  }
+  else
+  {
+      throw new Error ("Not currently in action phase.")
+  }    
+}
+function executeProductionPhase(game: Game)
+{
+  if (game.showPhase() === "productionPhase")
+  {
+    for (const player of game.showPlayers())
+    {
+        for (const element in player.listProduction)
+        {
+            player.addResource(element as R,player.playerProduction[element as R] )
+            console.log(element);
+        }
+    }
+    game.addLog(`Ending phase ${game.showPhase}. Current generation ${game.showGeneration}`);
+    game.nextPhase();
+    game.nextGeneration();
+  }
+  else
+  {
+      throw new Error ("Currently not in production phase.")
+  }    
 }

@@ -37,7 +37,7 @@ class Stack<T>
     {
         return this.array;
     }
-  }
+}
 
   /** 
     Class of generic logs.
@@ -54,7 +54,7 @@ class Log
       this.timestamp = new Date();
       this.message = message;
     }
-  }
+}
 /** 
   Implementation of a Stack of Logs.
 */
@@ -98,5 +98,5 @@ export class LogStack
     {
       return this.logs.toArray();
     }
-  }
+}
   

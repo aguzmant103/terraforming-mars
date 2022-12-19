@@ -11,6 +11,7 @@ class Player {
             terraformPoints: 0,
             victoryPoints: 0
         };
+        /* Pending: how to make this private */
         this.playerProduction = {
             MegaCredits: 1,
             Steel: 1,
@@ -19,6 +20,7 @@ class Player {
             Energy: 1,
             Heat: 1
         };
+        /* Pending: how to make this private */
         this.playerResources = {
             MegaCredits: 30,
             Steel: 30,
@@ -138,7 +140,7 @@ class Player {
         this.game.addLog(`${this.name} bought ${newCard.code}. ${this.name} now has ${this.playerResources.MegaCredits} MegaCredits. `);
         return this;
     }
-    // Pending: keeping this or not?
+    /* Pending: How to make this private? */
     addResource(resource, value) {
         this.playerResources[resource] += value;
         this.game.addLog(`${value + " " + resource} to ${this.name}`);
@@ -167,12 +169,6 @@ class Player {
         this.playerCards.push(newCard);
         return this;
     }
-    productionPhaseAction() {
-        for (let element in this.playerProduction) {
-            this.addResource(element, this.playerProduction[element]);
-            console.log(element);
-        }
-    }
 }
 exports.Player = Player;
 /**
@@ -190,7 +186,9 @@ function randomCard() {
     const code_string = keys[Math.floor(Math.random() * keys.length)];
     return cards_1.cardList[code_string];
 }
-// Pending: do we keep this or not?
+/**
+ *  Pending: do we keep this or not?
+ * */
 function hasRequiredResources(playableCard, checkPlayer) {
     for (const resource of playableCard.requiredResources) {
         if (resource.reqValue > checkPlayer.playerResources[resource.key]) {

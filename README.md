@@ -57,7 +57,7 @@ To exemplify the usage of different OOP concepts, the following list was compile
 
 ##### Usage of data structures:
 - [X] Stack "./logs" Line 5
-- [] LinkedList
+- [X] LinkedList "./gameEngine" Line 14 and 27
 
 ##### Usage of advanced elements:
 - [] Polymorphism in sub-typing (including inheritance and interface extension)
@@ -95,7 +95,6 @@ To exemplify the usage of different OOP concepts, the following list was compile
 - [X] Game show data - "Methods like Game.showGlobalParameters, showAllLogs, printBoard, etc"
 - [X] Prevent illegal actions! - "Tested as much as possible"
 - [X] Don't use classes for small things
-
 - [] Basic structure types to be more specific with input parameters.
 - [] Global Parameters are not publicly accesible
 - [] Game has sole responsibility for action execution and/or information exposure instead of sub-components. 

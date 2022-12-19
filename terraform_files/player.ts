@@ -9,7 +9,8 @@ export class Player {
         terraformPoints : 0,
         victoryPoints : 0
     }
-    private playerProduction : resources= 
+    /* Pending: how to make this private */
+    readonly playerProduction : resources= 
     {
         MegaCredits : 1,
         Steel : 1,
@@ -17,7 +18,8 @@ export class Player {
         Plants : 1,
         Energy : 1,
         Heat : 1
-    };
+    }
+    /* Pending: how to make this private */
     readonly playerResources : resources = // Initializing with resources for demonstration purposes
     {
         MegaCredits : 30,
@@ -27,7 +29,8 @@ export class Player {
         Energy : 30,
         Heat : 30
     }   
-    constructor (readonly name : string, private game : Game){
+    constructor (readonly name : string, private game : Game)
+    {
         this.name = name;    
         this.game = game; 
         this.game.addLog(`${name} added to game`);          
@@ -166,8 +169,8 @@ export class Player {
 
         return this;
     }
-    // Pending: keeping this or not?
-    private addResource(resource : R, value : number): this 
+    /* Pending: How to make this private? */
+    addResource(resource : R, value : number): this 
     {
         this.playerResources[resource] += value;
         this.game.addLog(`${value + " " + resource} to ${this.name}`);
@@ -199,26 +202,6 @@ export class Player {
         this.playerCards.push(newCard);
         return this;
     }
-    /**
-     * E
-    */
-    private productionPhaseAction()
-    {
-        if (this.game.gamePhase === productionPhase) // Pending 
-        {
-            for (let element in this.playerProduction)
-            {
-                this.addResource(element as R,this.playerProduction[element as R] )
-                console.log(element);
-            }
-            // Pending this.game.nextPhase
-        }
-        else
-        {
-            throw new Error ("The current phase is not production.")
-        }
-        
-    }
 }
 /** 
     Helper function to find a card in a player or return undefined. This does not need to be exported. 
@@ -237,7 +220,9 @@ function randomCard()
     const code_string = keys[Math.floor(Math.random() * keys.length)] as cardListType;
     return cardList[code_string];
 }
-// Pending: do we keep this or not?
+/**
+ *  Pending: do we keep this or not? 
+ * */
 function hasRequiredResources(playableCard : card, checkPlayer : Player) : boolean {
     for (const resource of playableCard.requiredResources){
         if (resource.reqValue >  checkPlayer.playerResources[resource.key])

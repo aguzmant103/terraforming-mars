@@ -4,22 +4,30 @@ exports.Game = void 0;
 const player_1 = require("./player");
 const logs_1 = require("./logs");
 const objects_1 = require("./objects");
+const gameEngine_1 = require("./gameEngine");
 /**
  * This Game class acts as the entry point to the players and board of a given game:
  * all components and features can be accessed from its properties and methods
  * (an arrangement known as the facade pattern).
  */
 class Game {
+    /**
+     * Constructor method when initializing a Game
+     * */
     constructor(dimensions) {
         /**
          * Global parameters of game that represent Oxygen, Ocean and Temperature levels.
          */
         this.globalParameters = { globalOxygen: 0, globalOcean: 0, globalTemperature: -30 }; //PENDING: how to restrict this against user manipulation.
+        this.gamePhases = new gameEngine_1.GamePhases();
+        this.gameGeneration = 1;
         /**
          * Initiallizing a player list when a game is created.
          */
         this.players = [];
-        /* Initiallizing a LogStack when a game is created. */
+        /**
+         * Initiallizing a LogStack when a game is created.
+         * */
         this.logs = new logs_1.LogStack(1000);
         // Automatically generate UID for this instance. Increase global counter
         this.gameId = Game._nextID++;
@@ -79,7 +87,13 @@ class Game {
         return this.logs.getLogs();
     }
     /**
-    * Return all logs of a game.
+    * Return the Game ID.
+    * */
+    showGameID() {
+        return this.gameId;
+    }
+    /**
+    * Return all players in the game.
     * */
     showPlayers() {
         return this.players;
@@ -101,6 +115,21 @@ class Game {
     */
     addLog(message) {
         this.logs.addLog(message);
+    }
+    /**
+     * Moving to next phase. Pending: restricting this.
+    */
+    nextPhase() {
+        this.gamePhases.nextPhase();
+    }
+    showPhase() {
+        return this.gamePhases.current.value;
+    }
+    showGeneration() {
+        return this.gameGeneration;
+    }
+    nextGeneration() {
+        this.gameGeneration++;
     }
 }
 exports.Game = Game;

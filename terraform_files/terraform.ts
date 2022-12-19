@@ -24,16 +24,23 @@ export class Game {
      */
     readonly globalParameters : GlobalParameters = { globalOxygen : 0, globalOcean : 0, globalTemperature : -30 }; //PENDING: how to restrict this against user manipulation.
     readonly gamePhases = new GamePhases();
-    readonly gameRound = 0;
+    private gameGeneration = 1;
     /**
      * Initiallizing a player list when a game is created.
      */
     private readonly players: Player[] = [];
-    /* Initiallizing a LogStack when a game is created. */
+    /**
+     * Initiallizing a LogStack when a game is created. 
+     * */
     private logs : LogStack = new LogStack(1000);
-    /* Initializing the board that will serve as a map. */
+    /**
+     * Initializing the board that will serve as a map. 
+     * */
     private board : GameBoard;
 
+    /** 
+     * Constructor method when initializing a Game 
+     * */
     constructor(dimensions : number)
     {
         // Automatically generate UID for this instance. Increase global counter
@@ -103,6 +110,13 @@ export class Game {
        return this.logs.getLogs();
     } 
     /** 
+    * Return the Game ID.
+    * */ 
+    public showGameID() 
+   {
+       return this.gameId;
+    } 
+    /** 
     * Return all players in the game.
     * */ 
     public showPlayers() 
@@ -129,5 +143,27 @@ export class Game {
     addLog(message : string)
     {
         this.logs.addLog(message);
+    }
+    /**
+     * Moving to next phase. Pending: restricting this.
+    */
+    nextPhase()
+    {
+        this.gamePhases.nextPhase();
+    }
+
+    showPhase()
+    {
+        return this.gamePhases.current.value;
+    }
+
+    showGeneration()
+    {
+        return this.gameGeneration;
+    }
+
+    nextGeneration()
+    {
+        this.gameGeneration++;
     }
 }
