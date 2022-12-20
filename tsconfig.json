@@ -12,5 +12,8 @@
     "files": [
         "terraform_files/index.ts",
         "test.ts"
-    ],         
+    ],
+    "script": {
+        "lint": "eslint"
+    }
 }
