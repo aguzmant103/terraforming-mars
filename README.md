@@ -10,74 +10,57 @@ The projects often directly or indirectly contribute to the terraforming process
 
 ## This implementation
 
-This implementation of Terraforming Mars is implemented using OOP in Typescript as part of Object Oriented Programming course.
+This implementation of Terraforming Mars is built using OOP in Typescript as part of Object Oriented Programming course.
 
 ## How to run me
 1. Change directory to the main "terraforming-mars" folder.
 2. Run 'node tests.js' and experiment by toggling the different console elements.
-Alternatively:
-2. Run 'node'
-3. Interactively use the following commands:
-4. PENDING OF IMPLEMENTATION
-
-## Available commands
-| Object | Command   |Parameters |
-|----------|----------|----------|
-| Game   | List    | Cell 3   |
-| Cell 4   | Cell 5   | Cell 6   |
 
 ## Out of Scope
 The following features have being deliveratively left out from implementation from the original game:
-- Tags
-- Awards
-- Actions 
-- Milestones
-- Complete list of Cards
-- Corporation selection for players
-- Editing other's players production values
+- Tags, Awards, Actions, Milestones
+- Whole card deck, Corporations
 
 ## Example Implementation and Concepts
 To exemplify the usage of different OOP concepts, the following list was compiled with examples:
 
 ##### Basic elements:
-- [X] Static Types "./resources" Line 5
-- [X] Type Aliases "./cards" Line 15, 16
+- [X] Static Types "./resources.ts" Line 5
+- [X] Type Aliases "./cards.ts" Line 15, 16
+- [X] For...of Loops "./terraform.ts" Line 45
+- [X] For...in Loops "./gameEngine.ts" Line 80
 - [] Constructing
-- [X] Destructuring "./players" Line 55, 72
-- [X] For...of Loops "./terraform" Line 45
-- [] For...in Loops
+- [X] Destructuring "./players.ts" Line 55, 72
 
 ##### More elements:
 - [X] Classes
-- [X] Class inheritance "./objects" Lines 79, 98, 122
 - [] Interfaces aka Class implementations
-- [X] Usage of static property "./terraform" Line 15
-- [X] Usage of private and not exportable methods "./logs" Line 66
+- [X] Class inheritance "./objects.ts" Lines 79, 122
+- [X] Usage of static property "./terraform.ts" Line 15
+- [X] Usage of private and not exportable methods "./logs.ts" Line 66
 
 
 ##### Usage of data structures:
-- [X] Stack "./logs" Line 5
-- [X] LinkedList "./gameEngine" Line 14 and 27
+- [X] Stack "./logs.ts" Line 5
+- [X] LinkedList "./gameEngine.ts" Line 14 and 27
 
 ##### Usage of advanced elements:
 - [] Polymorphism in sub-typing (including inheritance and interface extension)
 - [] Polymorphism (multiple call signatures)
-- [X] Generics - Polymorphism in parametric polymorphism "./logs" Line 5
+- [X] Generics - Polymorphism in parametric polymorphism "./logs.ts" Line 5
 
 ##### Usage of Design Patterns:
-- [X] Façade Pattern - "./terraform.ts" Line 7
-- [X] Factory Pattern - "./terraform.ts" Line 59
-- [] State Pattern
-- [] Builder Pattern
-- [] Fluint
+- [X] Façade Pattern "./terraform.ts" Line 7
+- [X] Factory Pattern "./terraform.ts" Line 59
+- [X] Builder Pattern "./player.ts" Line 73
 
 ##### Usage of principles and concepts:
-- [] SOLID
+- [X] SOLID "Across the application"
 
 ##### Organization:
-- [X] Single folder: can be found under the folder "terraform_files"
 - [X] Index: can be found under "terraform_files/index.ts"
-- [X] Export modules and use local modules - "This is used accross all modules"
+- [X] Single folder: can be found under the folder "terraform_files"
+- [X] Export modules and use local modules "This is used accross all modules"
 
 ##### Documentation:
 - [X] Add one line per method
@@ -92,7 +75,7 @@ To exemplify the usage of different OOP concepts, the following list was compile
 ##### Specifications:
 - [X] Multiple independent instances of Game "./test" Line 17
 - [X] Use of Readonly "./objects" Line 80, 81, 82... and many other places
-- [X] Game show data - "Methods like Game.showGlobalParameters, showAllLogs, printBoard, etc"
+- [X] Game show data - "Methods like Game.getGlobalParameters, getAllLogs, printBoard, etc"
 - [X] Prevent illegal actions! - "Tested as much as possible"
 - [X] Don't use classes for small things
 - [] Basic structure types to be more specific with input parameters.

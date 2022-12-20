@@ -67,6 +67,9 @@ export class Player {
     /** 
         Method to initialize a player with 3 random start cards.
     */
+    /** 
+    * Implementing Builder pattern methods  
+    */
     public withStartCards(): this 
     {
         this.playerCards = [];
@@ -91,7 +94,7 @@ export class Player {
         {
             let {key, higherOrEqual, reqValue } = playableCard.requiredGlobalParameter;
             // Check if the requirements are fulfilled. The 'higherOrEqual' boolean selects which comparison to make.
-            const reqFulfilled = higherOrEqual ? this.game.globalParameters[key]>=reqValue : this.game.globalParameters[key]<=reqValue;
+            const reqFulfilled = higherOrEqual ? this.game.getGlobalParameters(key)>=reqValue : this.game.getGlobalParameters(key)<=reqValue;
             if (!reqFulfilled){
                 throw new Error ('The global parameter requirements are not met.');
             }
@@ -113,8 +116,8 @@ export class Player {
         if (playableCard.changeGlobalParameter != undefined)
         {
             const { key, changeValue } = playableCard?.changeGlobalParameter;
-            this.game.globalParameters[key] += changeValue;
-            this.game.addLog(`${this.name} changed ${key} by ${changeValue}. New ${key} is ${this.game.globalParameters[key]}.`);
+            this.game.setGlobalParameters(key,changeValue);
+            this.game.addLog(`${this.name} changed ${key} by ${changeValue}. New ${key} is ${this.game.getGlobalParameters(key)}.`);
         }
 
         // 3.3 Change Player Resources
@@ -169,7 +172,9 @@ export class Player {
 
         return this;
     }
-    /* Pending: How to make this private? */
+    /**
+     * Pending: How to make this private?
+     */
     addResource(resource : R, value : number): this 
     {
         this.playerResources[resource] += value;
@@ -232,21 +237,3 @@ function hasRequiredResources(playableCard : card, checkPlayer : Player) : boole
     }
     return true;
 }
-
-/* Pending: class Player
-Properties:
-    type Player Information (de
-        Properties
-            Corporation // Not
-            Tags // Not
-            Actions // Not
-            Effects // Not       
-Constructor:
-    Name
-    (corporation, …)
-    …
-Methods:
-    Cards - Buy new 
-    Cards - Use them
-    Do Actions or Pass or Skip Turn
- */

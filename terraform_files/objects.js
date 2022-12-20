@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GameBoard = void 0;
+exports.CityClass = exports.GreeneryClass = exports.OceanClass = exports.GameBoard = void 0;
 class GameBoard {
     constructor(game, dimensions) {
         this.board = [];
@@ -52,6 +52,7 @@ class OceanClass extends GameObject {
         this.owner.playerResources.MegaCredits += 2;
     }
 }
+exports.OceanClass = OceanClass;
 /**   The GreeneryClass extends the GameObject class and represents a terraforming Greenery in the game */
 class GreeneryClass extends GameObject {
     // A constructor for creating a new Greenery instance
@@ -65,7 +66,7 @@ class GreeneryClass extends GameObject {
     }
     /** Elevate the Oxygen level by 2.  */
     addOxygen() {
-        // PEnding: this.owner.game.globalParameters.globalOxygen +=2;
+        // Pending this.owner.game.setGlobalParameters("globalOxygen",2);
     }
     /** Increase the Victory Point by 1 and Terraforming Points by 1 to the owner of the title.  */
     addPoints() {
@@ -73,6 +74,7 @@ class GreeneryClass extends GameObject {
         this.owner.addVictoryPoints(1);
     }
 }
+exports.GreeneryClass = GreeneryClass;
 /**   The GreeneryClass extends the GameObject class and represents a terraforming City in the game */
 class CityClass extends GameObject {
     // A constructor for creating a new City instance
@@ -88,3 +90,4 @@ class CityClass extends GameObject {
         this.owner.addTerraformPoints(2);
     }
 }
+exports.CityClass = CityClass;

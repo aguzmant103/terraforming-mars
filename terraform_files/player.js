@@ -61,6 +61,9 @@ class Player {
     /**
         Method to initialize a player with 3 random start cards.
     */
+    /**
+    * Implementing Builder pattern methods
+    */
     withStartCards() {
         this.playerCards = [];
         this.playerCards.push(randomCard(), randomCard(), randomCard());
@@ -80,7 +83,7 @@ class Player {
         if (playableCard.requiredGlobalParameter != undefined) {
             let { key, higherOrEqual, reqValue } = playableCard.requiredGlobalParameter;
             // Check if the requirements are fulfilled. The 'higherOrEqual' boolean selects which comparison to make.
-            const reqFulfilled = higherOrEqual ? this.game.globalParameters[key] >= reqValue : this.game.globalParameters[key] <= reqValue;
+            const reqFulfilled = higherOrEqual ? this.game.getGlobalParameters(key) >= reqValue : this.game.getGlobalParameters(key) <= reqValue;
             if (!reqFulfilled) {
                 throw new Error('The global parameter requirements are not met.');
             }
@@ -97,8 +100,8 @@ class Player {
         // 3.2 Change Global Parameters
         if (playableCard.changeGlobalParameter != undefined) {
             const { key, changeValue } = playableCard?.changeGlobalParameter;
-            this.game.globalParameters[key] += changeValue;
-            this.game.addLog(`${this.name} changed ${key} by ${changeValue}. New ${key} is ${this.game.globalParameters[key]}.`);
+            this.game.setGlobalParameters(key, changeValue);
+            this.game.addLog(`${this.name} changed ${key} by ${changeValue}. New ${key} is ${this.game.getGlobalParameters(key)}.`);
         }
         // 3.3 Change Player Resources
         if (playableCard.changePlayerResources != undefined) {
@@ -140,7 +143,9 @@ class Player {
         this.game.addLog(`${this.name} bought ${newCard.code}. ${this.name} now has ${this.playerResources.MegaCredits} MegaCredits. `);
         return this;
     }
-    /* Pending: How to make this private? */
+    /**
+     * Pending: How to make this private?
+     */
     addResource(resource, value) {
         this.playerResources[resource] += value;
         this.game.addLog(`${value + " " + resource} to ${this.name}`);
@@ -197,20 +202,3 @@ function hasRequiredResources(playableCard, checkPlayer) {
     }
     return true;
 }
-/* Pending: class Player
-Properties:
-    type Player Information (de
-        Properties
-            Corporation // Not
-            Tags // Not
-            Actions // Not
-            Effects // Not
-Constructor:
-    Name
-    (corporation, …)
-    …
-Methods:
-    Cards - Buy new
-    Cards - Use them
-    Do Actions or Pass or Skip Turn
- */ 

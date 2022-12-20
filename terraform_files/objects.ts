@@ -74,7 +74,7 @@ class GameObject {
   
   }
 /**   The OceanClass extends the GameObject class and represents a terraforming Ocean in the game */
-class OceanClass extends GameObject {
+export class OceanClass extends GameObject {
   readonly titleType = "Ocean";
   readonly representation = "O";
   readonly owner : Player;
@@ -93,7 +93,7 @@ class OceanClass extends GameObject {
 
 }
 /**   The GreeneryClass extends the GameObject class and represents a terraforming Greenery in the game */
-class GreeneryClass extends GameObject {
+export class GreeneryClass extends GameObject {
   readonly titleType = "Greenery";
   readonly representation = "G";
   readonly owner : Player;
@@ -107,7 +107,7 @@ class GreeneryClass extends GameObject {
   /** Elevate the Oxygen level by 2.  */
   private addOxygen()
   {
-    // PEnding: this.owner.game.globalParameters.globalOxygen +=2;
+    // Pending this.owner.game.setGlobalParameters("globalOxygen",2);
   }
   /** Increase the Victory Point by 1 and Terraforming Points by 1 to the owner of the title.  */
   private addPoints()
@@ -117,7 +117,7 @@ class GreeneryClass extends GameObject {
   }
   }
 /**   The GreeneryClass extends the GameObject class and represents a terraforming City in the game */
-class CityClass extends GameObject {
+export class CityClass extends GameObject {
   readonly titleType = "City";
   readonly representation = "C";
   readonly owner : Player;

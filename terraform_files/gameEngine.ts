@@ -49,10 +49,10 @@ export class GamePhases
 
 function executeTurnOrderPhase(game: Game)
 {
-  if (game.showPhase() === "turnOrderPhase")
+  if (game.getPhase() === "turnOrderPhase")
   {
-    game.addLog(`Ending phase ${game.showPhase}. Current generation ${game.showGeneration}`);
-    game.gamePhases.nextPhase();
+    game.addLog(`Ending phase ${game.getPhase()}. Current generation ${game.getGeneration()}`);
+    game.nextPhase();
   }
   else
   {
@@ -61,9 +61,9 @@ function executeTurnOrderPhase(game: Game)
 }
 function executeResearchPhase(game: Game)
 {
-  if (game.showPhase() === "researchPhase")
+  if (game.getPhase() === "researchPhase")
   {
-    game.addLog(`Ending phase ${game.showPhase}. Current generation ${game.showGeneration}`);
+    game.addLog(`Ending phase ${game.getPhase()}. Current generation ${game.getGeneration()}`);
     game.nextPhase();
   }
   else
@@ -73,9 +73,9 @@ function executeResearchPhase(game: Game)
 }
 function executeActionPhase(game: Game)
 {
-  if (game.showPhase() === "actionPhase")
+  if (game.getPhase() === "actionPhase")
   {
-    for (let player of game.showPlayers())
+    for (let player of game.getAllPlayers())
     {
         for (let element in player.listProduction)
         {
@@ -83,7 +83,7 @@ function executeActionPhase(game: Game)
             console.log(element);
         }
     }
-    game.addLog(`Ending phase ${game.showPhase}. Current generation ${game.showGeneration}`);
+    game.addLog(`Ending phase ${game.getPhase()}. Current generation ${game.getGeneration()}`);
     game.nextPhase();
   }
   else
@@ -93,9 +93,9 @@ function executeActionPhase(game: Game)
 }
 function executeProductionPhase(game: Game)
 {
-  if (game.showPhase() === "productionPhase")
+  if (game.getPhase() === "productionPhase")
   {
-    for (const player of game.showPlayers())
+    for (const player of game.getAllPlayers())
     {
         for (const element in player.listProduction)
         {
@@ -103,7 +103,7 @@ function executeProductionPhase(game: Game)
             console.log(element);
         }
     }
-    game.addLog(`Ending phase ${game.showPhase}. Current generation ${game.showGeneration}`);
+    game.addLog(`Ending phase ${game.getPhase()}. Current generation ${game.getGeneration()}`);
     game.nextPhase();
     game.nextGeneration();
   }

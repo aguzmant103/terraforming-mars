@@ -13,14 +13,14 @@ console.log("  \n    WELCOME TO THE TESTING GROUNDS OF TERRAFORMING MARS!    \n 
 console.log("1. INITIALIZING TWO GAMES");
 let game1 = new terraform_files_1.Game(10); // Initializing a game with a 10x10 board.
 let game2 = new terraform_files_1.Game(25); // Initializing a game with a 25x25 board.
-//console.log(game2.showGameID()); // <- Check the different Game IDs
-//console.log(game2.showGameID()); // <- Check the different Game IDs
+//console.log(game2.getGameID()); // <- Check the different Game IDs
+//console.log(game2.getGameID()); // <- Check the different Game IDs
 console.log("1.1 PRINTING AN EMPTY BOARD");
 //game2.printBoard(); // <- Print an empty board
 console.log("1.2 CHECKING CURRENT GAME PHASE AND GENERATION");
-console.log(game2.showPhase());
-console.log(game2.showGeneration());
-console.log(game2.showAllLogs());
+console.log(game2.getPhase());
+console.log(game2.getGeneration());
+console.log(game2.getAllLogs());
 console.log("1.3a. ADDING NEW PLAYERS TO EACH GAME");
 game1.newPlayer("Susan");
 game2.newPlayer("Steve");
@@ -49,8 +49,14 @@ console.log(game2.getPlayer("Mark")?.listResources());
 console.log(game2.getPlayer("Mark")?.listProduction());
 console.log(game2.getPlayer("Mark")?.listCards()); */
 console.log(" \n 3. SHOWING GAME LOGS");
-game1.showAllLogs();
-//console.log(game2.showAllLogs()); // <- Prints the available logs
+game1.getAllLogs();
+//console.log(game2.getAllLogs()); // <- Prints the available logs
+/*
+    1. Make this safe
+    2. Test it again
+    3. Clean stuff
+    4. Test it again
+    5. Update Readme */
 /* Pending for Monday
 1. Contineu with gameEngine and Objects
 2. Continue with Pending stuff

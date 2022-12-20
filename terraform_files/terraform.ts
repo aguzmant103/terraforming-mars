@@ -21,9 +21,15 @@ export class Game {
     private gameId: bigint;
     /**
      * Global parameters of game that represent Oxygen, Ocean and Temperature levels.
+     * PENDING: how to restrict this against user manipulation.
      */
-    readonly globalParameters : GlobalParameters = { globalOxygen : 0, globalOcean : 0, globalTemperature : -30 }; //PENDING: how to restrict this against user manipulation.
-    readonly gamePhases = new GamePhases();
+    private globalParameters = 
+    { 
+        globalOxygen : 0, 
+        globalOcean : 0, 
+        globalTemperature : -30 
+    }; 
+    private gamePhases = new GamePhases();
     private gameGeneration = 1;
     /**
      * Initiallizing a player list when a game is created.
@@ -37,7 +43,6 @@ export class Game {
      * Initializing the board that will serve as a map. 
      * */
     private board : GameBoard;
-
     /** 
      * Constructor method when initializing a Game 
      * */
@@ -50,7 +55,91 @@ export class Game {
         this.addLog(`Game initialized`);  
     }
 
-    // ==== METHODS ====
+    // ===== METHODS ===== //
+    // ==== GETTERS ====
+    /** 
+    * Return all logs of a game.
+    * */ 
+    public getAllLogs() 
+   {
+       return this.logs.getLogs();
+    } 
+    /** 
+    * Return the Game ID.
+    * */ 
+    public getGameID() 
+   {
+       return this.gameId;
+    } 
+    /** 
+    * Return all players in the game.
+    * */ 
+    public getAllPlayers() 
+    {
+       return this.players;
+    } 
+     /** 
+    * Return the last logs of a game.
+    * */ 
+    public getLastLog() 
+   {
+       return this.logs.peak();
+    } 
+    /**
+     * Returns the first player with the queried name, or undefined if one does not exist.
+     */
+    public getPlayer(name: string): Player|undefined 
+    {
+        return this.players.find(element => element.name === name);
+    }
+    /** 
+     * Return all or one global parameters of this game.
+     * */ 
+    public getGlobalParameters(key? : GP) 
+    {
+        if (key === undefined)
+        {
+            return this.globalParameters;
+        }
+        else
+        {
+            return this.globalParameters[key];
+        }
+    }
+    /**
+     * Get the currentgame phase.
+     */
+    public getPhase()
+    {
+        return this.gamePhases.current.value;
+    }
+    /**
+     * Get the current game generation.
+     */
+    public getGeneration()
+    {
+        return this.gameGeneration;
+    }
+
+    // ==== SETTERS ====
+    /** 
+     * PENDING: Do I keep this? Change a global parameters of a game.
+     * */ 
+    public setGlobalParameters(key : GP, changeValue : number) 
+    {
+        /* Pending to implement a check on the maximum values. */
+        this.globalParameters[key] += changeValue;
+        return this.globalParameters;
+    }
+
+    // ==== MISC ====
+    /**
+     * Prints the current status of the board.
+    */
+    public printBoard()
+    {
+        this.board.printBoard();
+    }
     /** 
     * The player specified plays a card. Returns undefined if the player is not found. 
     * Throws an error if the player does not have the card. 
@@ -68,6 +157,7 @@ export class Game {
     */
     public newPlayer(playerName : string) : Player 
     {
+        /** Pending to add a check to only allow this before a game is started. */
         if (this.getPlayer(playerName) === undefined)
         {
             const player = new Player (playerName, this);
@@ -80,90 +170,36 @@ export class Game {
             return this.getPlayer(playerName) as Player; // This will always return a Player (and not undefined) due to the check above.
         }
     }
-    /**
-     * Returns the first player with the queried name, or undefined if one does not exist.
-     */
-    public getPlayer(name: string): Player|undefined 
-    {
-        return this.players.find(element => element.name === name);
-    }
-    /** 
-     * Return the current global parameters of a game.
-     * */ 
-    public showGlobalParameters() 
-    {
-        return this.globalParameters;
-    }
-    /** 
-     * PENDING: Do I keep this? Change a global parameters of a game.
-     * */ 
-    public changeGlobalParameters(key : GP, changeValue : number) 
-    {
-        this.globalParameters[key] += changeValue;
-        return this.globalParameters;
-    }
-    /** 
-    * Return all logs of a game.
-    * */ 
-    public showAllLogs() 
-   {
-       return this.logs.getLogs();
-    } 
-    /** 
-    * Return the Game ID.
-    * */ 
-    public showGameID() 
-   {
-       return this.gameId;
-    } 
-    /** 
-    * Return all players in the game.
-    * */ 
-    public showPlayers() 
-    {
-       return this.players;
-    } 
-     /** 
-    * Return the last logs of a game.
-    * */ 
-    public showLastLog() 
-   {
-       return this.logs.peak();
-    } 
-    /**
-     * Prints the current status of the board.
-    */
-    public printBoard()
-    {
-        this.board.printBoard();
-    }
     /** 
      * Adds a log to the current game. PENDING: how to restrict this against user manipulation.
     */
-    addLog(message : string)
+    public addLog(message : string)
     {
         this.logs.addLog(message);
     }
     /**
      * Moving to next phase. Pending: restricting this.
     */
-    nextPhase()
+    public nextPhase()
     {
         this.gamePhases.nextPhase();
     }
-
-    showPhase()
-    {
-        return this.gamePhases.current.value;
-    }
-
-    showGeneration()
-    {
-        return this.gameGeneration;
-    }
-
-    nextGeneration()
+    /**
+     * Goes to the next generation.
+      */
+    public nextGeneration()
     {
         this.gameGeneration++;
+    }
+    /** 
+     * Start the game. No new users can be added after this point 
+     * */
+    public startGame()
+    {
+        if (this.getGeneration()=== 0 && this.getPhase() === "turnOrderPhase")
+        {
+            this.addLog("Game starting.")
+        }
+        /* Pending to implement a new state before the game is started and a check in new player added. */
     }
 }

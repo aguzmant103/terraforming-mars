@@ -37,17 +37,17 @@ class GamePhases {
 }
 exports.GamePhases = GamePhases;
 function executeTurnOrderPhase(game) {
-    if (game.showPhase() === "turnOrderPhase") {
-        game.addLog(`Ending phase ${game.showPhase}. Current generation ${game.showGeneration}`);
-        game.gamePhases.nextPhase();
+    if (game.getPhase() === "turnOrderPhase") {
+        game.addLog(`Ending phase ${game.getPhase()}. Current generation ${game.getGeneration()}`);
+        game.nextPhase();
     }
     else {
         throw new Error("Not currently in Turn Order phase.");
     }
 }
 function executeResearchPhase(game) {
-    if (game.showPhase() === "researchPhase") {
-        game.addLog(`Ending phase ${game.showPhase}. Current generation ${game.showGeneration}`);
+    if (game.getPhase() === "researchPhase") {
+        game.addLog(`Ending phase ${game.getPhase()}. Current generation ${game.getGeneration()}`);
         game.nextPhase();
     }
     else {
@@ -55,14 +55,14 @@ function executeResearchPhase(game) {
     }
 }
 function executeActionPhase(game) {
-    if (game.showPhase() === "actionPhase") {
-        for (let player of game.showPlayers()) {
+    if (game.getPhase() === "actionPhase") {
+        for (let player of game.getAllPlayers()) {
             for (let element in player.listProduction) {
                 player.addResource(element, player.playerProduction[element]);
                 console.log(element);
             }
         }
-        game.addLog(`Ending phase ${game.showPhase}. Current generation ${game.showGeneration}`);
+        game.addLog(`Ending phase ${game.getPhase()}. Current generation ${game.getGeneration()}`);
         game.nextPhase();
     }
     else {
@@ -70,14 +70,14 @@ function executeActionPhase(game) {
     }
 }
 function executeProductionPhase(game) {
-    if (game.showPhase() === "productionPhase") {
-        for (const player of game.showPlayers()) {
+    if (game.getPhase() === "productionPhase") {
+        for (const player of game.getAllPlayers()) {
             for (const element in player.listProduction) {
                 player.addResource(element, player.playerProduction[element]);
                 console.log(element);
             }
         }
-        game.addLog(`Ending phase ${game.showPhase}. Current generation ${game.showGeneration}`);
+        game.addLog(`Ending phase ${game.getPhase()}. Current generation ${game.getGeneration()}`);
         game.nextPhase();
         game.nextGeneration();
     }

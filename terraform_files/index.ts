@@ -8,8 +8,9 @@
 
 export { card, cardList, cardListType} from "./cards";
 export { GlobalParameters } from "./globalParameters";
+export { GamePhases } from "./gameEngine";
 export { LogStack } from "./logs";
-export { } from "./objects"; // Pending
+export { OceanClass, GreeneryClass, CityClass } from "./objects";
 export { Player } from "./player";
 export { R, resources } from "./resources";
 export { Game } from "./terraform";
