@@ -30,7 +30,9 @@ class GameBoard {
     }
 }
 exports.GameBoard = GameBoard;
-// The base GameObject class represents any object that exists in the game board
+/**
+ * The base GameObject class represents any object that exists in the game board
+ * */
 class GameObject {
     // A constructor for creating a new GameObject instance
     constructor(x, y) {
@@ -38,7 +40,9 @@ class GameObject {
         this.y = y;
     }
 }
-/**   The OceanClass extends the GameObject class and represents a terraforming Ocean in the game */
+/**
+ * The OceanClass extends the GameObject class and represents a terraforming Ocean in the game
+ * */
 class OceanClass extends GameObject {
     // A constructor for creating a new Ocean instance
     constructor(x, y, owner) {
@@ -53,7 +57,9 @@ class OceanClass extends GameObject {
     }
 }
 exports.OceanClass = OceanClass;
-/**   The GreeneryClass extends the GameObject class and represents a terraforming Greenery in the game */
+/**
+ * The GreeneryClass extends the GameObject class and represents a terraforming Greenery in the game
+ * */
 class GreeneryClass extends GameObject {
     // A constructor for creating a new Greenery instance
     constructor(x, y, owner) {
@@ -61,12 +67,7 @@ class GreeneryClass extends GameObject {
         this.titleType = "Greenery";
         this.representation = "G";
         this.owner = owner;
-        this.addOxygen;
         this.addPoints;
-    }
-    /** Elevate the Oxygen level by 2.  */
-    addOxygen() {
-        // Pending this.owner.game.setGlobalParameters("globalOxygen",2);
     }
     /** Increase the Victory Point by 1 and Terraforming Points by 1 to the owner of the title.  */
     addPoints() {
@@ -75,7 +76,9 @@ class GreeneryClass extends GameObject {
     }
 }
 exports.GreeneryClass = GreeneryClass;
-/**   The GreeneryClass extends the GameObject class and represents a terraforming City in the game */
+/**
+ * The GreeneryClass extends the GameObject class and represents a terraforming City in the game
+ * */
 class CityClass extends GameObject {
     // A constructor for creating a new City instance
     constructor(x, y, owner) {

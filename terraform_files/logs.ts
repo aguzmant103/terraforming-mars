@@ -84,12 +84,12 @@ export class LogStack
       return this.logs.pop();
     }
     // A method that returns the top log without removing it.
-    peak()
+    public peak()
     {
       return this.peak;
     }
     // A public method to add a log to the stack.
-    addLog(message : string) : void 
+    public addLog(message : string) : void 
     {
       this.logs.push(new Log (message));
     }

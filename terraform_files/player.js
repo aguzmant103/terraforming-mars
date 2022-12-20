@@ -11,7 +11,6 @@ class Player {
             terraformPoints: 0,
             victoryPoints: 0
         };
-        /* Pending: how to make this private */
         this.playerProduction = {
             MegaCredits: 1,
             Steel: 1,
@@ -20,7 +19,6 @@ class Player {
             Energy: 1,
             Heat: 1
         };
-        /* Pending: how to make this private */
         this.playerResources = {
             MegaCredits: 30,
             Steel: 30,
@@ -138,13 +136,13 @@ class Player {
             throw new Error(`${this.name} does not have enough MegaCredits to buy a card.`);
         }
         // 3. Perform the transitions
-        this.addCard(newCard);
+        this.addCard(stringToCard(newCard));
         this.playerResources.MegaCredits -= 3;
-        this.game.addLog(`${this.name} bought ${newCard.code}. ${this.name} now has ${this.playerResources.MegaCredits} MegaCredits. `);
+        this.game.addLog(`${this.name} bought ${newCard}. ${this.name} now has ${this.playerResources.MegaCredits} MegaCredits. `);
         return this;
     }
     /**
-     * Pending: How to make this private?
+     * Adds resource to player.
      */
     addResource(resource, value) {
         this.playerResources[resource] += value;
@@ -184,21 +182,18 @@ function returnCardInPlayer(codeToSearch, playerToSearch) {
     return returningCard;
 }
 /**
+    Helper function to find a card from a string.
+*/
+function stringToCard(codeToSearch) {
+    const array = Object.values(cards_1.cardList);
+    const returningCard = array.find(element => element.code === codeToSearch);
+    return returningCard;
+}
+/**
  * Helper function that returns a random card from the available cards in the game.
  */
 function randomCard() {
     const keys = Object.keys(cards_1.cardList);
     const code_string = keys[Math.floor(Math.random() * keys.length)];
     return cards_1.cardList[code_string];
-}
-/**
- *  Pending: do we keep this or not?
- * */
-function hasRequiredResources(playableCard, checkPlayer) {
-    for (const resource of playableCard.requiredResources) {
-        if (resource.reqValue > checkPlayer.playerResources[resource.key]) {
-            throw new Error(`Not enough ${resource.key} available to play "${playableCard.name}".`);
-        }
-    }
-    return true;
 }

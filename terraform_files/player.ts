@@ -9,7 +9,6 @@ export class Player {
         terraformPoints : 0,
         victoryPoints : 0
     }
-    /* Pending: how to make this private */
     readonly playerProduction : resources= 
     {
         MegaCredits : 1,
@@ -19,7 +18,6 @@ export class Player {
         Energy : 1,
         Heat : 1
     }
-    /* Pending: how to make this private */
     readonly playerResources : resources = // Initializing with resources for demonstration purposes
     {
         MegaCredits : 30,
@@ -157,7 +155,7 @@ export class Player {
     /** 
         Buy a card if the player has the resources.    
     */
-    public buyCard(newCard: card): this
+    public buyCard(newCard: string): this
     {
         // 2. Check that the preconditions for the card effects hold
         if (this.playerResources.MegaCredits < 3)
@@ -165,15 +163,16 @@ export class Player {
             throw new Error (`${this.name} does not have enough MegaCredits to buy a card.`)
         }
 
+        
         // 3. Perform the transitions
-        this.addCard(newCard);
+        this.addCard(stringToCard(newCard) as card);
         this.playerResources.MegaCredits -= 3;
-        this.game.addLog(`${this.name} bought ${newCard.code}. ${this.name} now has ${this.playerResources.MegaCredits} MegaCredits. `);
+        this.game.addLog(`${this.name} bought ${newCard}. ${this.name} now has ${this.playerResources.MegaCredits} MegaCredits. `);
 
         return this;
     }
     /**
-     * Pending: How to make this private?
+     * Adds resource to player.
      */
     addResource(resource : R, value : number): this 
     {
@@ -216,6 +215,17 @@ function returnCardInPlayer (codeToSearch : string, playerToSearch : Player ) : 
     const returningCard = playerToSearch.listCards().find(element => element.code === codeToSearch);
     return returningCard;
 }
+
+/** 
+    Helper function to find a card from a string.
+*/
+function stringToCard (codeToSearch : string) : card | undefined 
+{
+    const array = Object.values(cardList);
+    const returningCard = array.find(element => element.code === codeToSearch);
+    return returningCard;
+}
+
 /**
  * Helper function that returns a random card from the available cards in the game.
  */
@@ -224,16 +234,4 @@ function randomCard()
     const keys = Object.keys(cardList);
     const code_string = keys[Math.floor(Math.random() * keys.length)] as cardListType;
     return cardList[code_string];
-}
-/**
- *  Pending: do we keep this or not? 
- * */
-function hasRequiredResources(playableCard : card, checkPlayer : Player) : boolean {
-    for (const resource of playableCard.requiredResources){
-        if (resource.reqValue >  checkPlayer.playerResources[resource.key])
-        {
-            throw new Error (`Not enough ${resource.key} available to play "${playableCard.name}".`);
-        }
-    }
-    return true;
 }

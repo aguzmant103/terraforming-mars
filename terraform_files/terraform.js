@@ -17,7 +17,6 @@ class Game {
     constructor(dimensions) {
         /**
          * Global parameters of game that represent Oxygen, Ocean and Temperature levels.
-         * PENDING: how to restrict this against user manipulation.
          */
         this.globalParameters = {
             globalOxygen: 0,
@@ -34,11 +33,12 @@ class Game {
          * Initiallizing a LogStack when a game is created.
          * */
         this.logs = new logs_1.LogStack(1000);
+        this.gameStarted = false;
         // Automatically generate UID for this instance. Increase global counter
         this.gameId = Game._nextID++;
         // Instantiates a new board tied to this game.
         this.board = new objects_1.GameBoard(this, dimensions);
-        this.addLog(`Game initialized`);
+        this.addLog(`Game # ${this.gameId} created.`);
     }
     // ===== METHODS ===== //
     // ==== GETTERS ====
@@ -97,10 +97,9 @@ class Game {
     }
     // ==== SETTERS ====
     /**
-     * PENDING: Do I keep this? Change a global parameters of a game.
+     * Change a global parameters of a game.
      * */
     setGlobalParameters(key, changeValue) {
-        /* Pending to implement a check on the maximum values. */
         this.globalParameters[key] += changeValue;
         return this.globalParameters;
     }
@@ -126,32 +125,36 @@ class Game {
     * Creates a new player and adds it to this game. No duplicated names are possible.
     */
     newPlayer(playerName) {
-        /** Pending to add a check to only allow this before a game is started. */
+        /* Check if the game has started already */
+        if (this.gameStarted === true) {
+            throw new Error("Can not add a new player as the game has already started.");
+        }
+        /* Check if the name is unique. */
         if (this.getPlayer(playerName) === undefined) {
             const player = new player_1.Player(playerName, this);
             this.players.push(player);
             return player;
         }
-        else {
-            this.addLog("Can't have duplicated player names.");
+        else /* If not unique return the current player. */ {
+            this.addLog("Can not have duplicated player names.");
             return this.getPlayer(playerName); // This will always return a Player (and not undefined) due to the check above.
         }
     }
     /**
-     * Adds a log to the current game. PENDING: how to restrict this against user manipulation.
+     * Adds a log to the current game.
     */
     addLog(message) {
         this.logs.addLog(message);
     }
     /**
-     * Moving to next phase. Pending: restricting this.
+     * Moving to next phase.
     */
     nextPhase() {
         this.gamePhases.nextPhase();
     }
     /**
      * Goes to the next generation.
-      */
+     * */
     nextGeneration() {
         this.gameGeneration++;
     }
@@ -159,10 +162,10 @@ class Game {
      * Start the game. No new users can be added after this point
      * */
     startGame() {
-        if (this.getGeneration() === 0 && this.getPhase() === "turnOrderPhase") {
+        if (this.getGeneration() === 1 && this.getPhase() === "Turn Order Phase") {
             this.addLog("Game starting.");
+            this.gameStarted == true;
         }
-        /* Pending to implement a new state before the game is started and a check in new player added. */
     }
 }
 exports.Game = Game;

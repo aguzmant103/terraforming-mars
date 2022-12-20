@@ -29,10 +29,10 @@ export class GamePhases
   current: PhaseNode;
   constructor() 
   {
-    const firstNode = new PhaseNode("turn order");
-    const secondNode = new PhaseNode("research");
-    const thirdNode = new PhaseNode("action");
-    const fourthNode = new PhaseNode("production");
+    const firstNode = new PhaseNode("Turn Order Phase");
+    const secondNode = new PhaseNode("Research Phase");
+    const thirdNode = new PhaseNode("Action Phase");
+    const fourthNode = new PhaseNode("Production Phase");
     
     firstNode.next = secondNode;
     secondNode.next = thirdNode;
@@ -49,7 +49,7 @@ export class GamePhases
 
 function executeTurnOrderPhase(game: Game)
 {
-  if (game.getPhase() === "turnOrderPhase")
+  if (game.getPhase() === "Turn Order Phase")
   {
     game.addLog(`Ending phase ${game.getPhase()}. Current generation ${game.getGeneration()}`);
     game.nextPhase();
@@ -61,7 +61,7 @@ function executeTurnOrderPhase(game: Game)
 }
 function executeResearchPhase(game: Game)
 {
-  if (game.getPhase() === "researchPhase")
+  if (game.getPhase() === "Research Phase")
   {
     game.addLog(`Ending phase ${game.getPhase()}. Current generation ${game.getGeneration()}`);
     game.nextPhase();
@@ -73,7 +73,7 @@ function executeResearchPhase(game: Game)
 }
 function executeActionPhase(game: Game)
 {
-  if (game.getPhase() === "actionPhase")
+  if (game.getPhase() === "Action Phase")
   {
     for (let player of game.getAllPlayers())
     {
@@ -93,7 +93,7 @@ function executeActionPhase(game: Game)
 }
 function executeProductionPhase(game: Game)
 {
-  if (game.getPhase() === "productionPhase")
+  if (game.getPhase() === "Production Phase")
   {
     for (const player of game.getAllPlayers())
     {

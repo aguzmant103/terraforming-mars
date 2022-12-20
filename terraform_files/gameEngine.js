@@ -21,10 +21,10 @@ class PhaseNode {
  * */
 class GamePhases {
     constructor() {
-        const firstNode = new PhaseNode("turn order");
-        const secondNode = new PhaseNode("research");
-        const thirdNode = new PhaseNode("action");
-        const fourthNode = new PhaseNode("production");
+        const firstNode = new PhaseNode("Turn Order Phase");
+        const secondNode = new PhaseNode("Research Phase");
+        const thirdNode = new PhaseNode("Action Phase");
+        const fourthNode = new PhaseNode("Production Phase");
         firstNode.next = secondNode;
         secondNode.next = thirdNode;
         thirdNode.next = fourthNode;
@@ -37,7 +37,7 @@ class GamePhases {
 }
 exports.GamePhases = GamePhases;
 function executeTurnOrderPhase(game) {
-    if (game.getPhase() === "turnOrderPhase") {
+    if (game.getPhase() === "Turn Order Phase") {
         game.addLog(`Ending phase ${game.getPhase()}. Current generation ${game.getGeneration()}`);
         game.nextPhase();
     }
@@ -46,7 +46,7 @@ function executeTurnOrderPhase(game) {
     }
 }
 function executeResearchPhase(game) {
-    if (game.getPhase() === "researchPhase") {
+    if (game.getPhase() === "Research Phase") {
         game.addLog(`Ending phase ${game.getPhase()}. Current generation ${game.getGeneration()}`);
         game.nextPhase();
     }
@@ -55,7 +55,7 @@ function executeResearchPhase(game) {
     }
 }
 function executeActionPhase(game) {
-    if (game.getPhase() === "actionPhase") {
+    if (game.getPhase() === "Action Phase") {
         for (let player of game.getAllPlayers()) {
             for (let element in player.listProduction) {
                 player.addResource(element, player.playerProduction[element]);
@@ -70,7 +70,7 @@ function executeActionPhase(game) {
     }
 }
 function executeProductionPhase(game) {
-    if (game.getPhase() === "productionPhase") {
+    if (game.getPhase() === "Production Phase") {
         for (const player of game.getAllPlayers()) {
             for (const element in player.listProduction) {
                 player.addResource(element, player.playerProduction[element]);
